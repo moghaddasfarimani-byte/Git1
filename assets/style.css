@@ -252,6 +252,18 @@ p { margin: 0 0 1em; }
 .car__media .car-svg { width: 88%; transition: transform .8s var(--ease); }
 .car:hover .car__media img { transform: scale(1.08); }
 .car:hover .car__media .car-svg { transform: translateX(-10px) scale(1.04); }
+.car__media.has-photo { background: #151925; }
+.car__media.has-photo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, .35), transparent 35%, transparent 70%, rgba(11, 13, 20, .55));
+}
+.car__media img { animation: photoIn .8s var(--ease) both; }
+@keyframes photoIn { from { opacity: 0; } }
+.car__credit {
+  position: absolute; bottom: 8px; left: 10px; z-index: 2; font-size: .68rem; direction: ltr;
+  color: rgba(255, 255, 255, .7); text-shadow: 0 1px 3px #000;
+}
+.car__credit:hover { color: #fff; text-decoration: underline; }
 .car__tag {
   position: absolute; top: 14px; right: 14px; z-index: 2; font-size: .78rem; font-weight: 700;
   padding: 3px 10px; border-radius: 999px; background: rgba(0, 0, 0, .55); backdrop-filter: blur(6px);
@@ -362,6 +374,8 @@ p { margin: 0 0 1em; }
 .footer nav { display: flex; flex-wrap: wrap; gap: 22px; color: var(--muted); }
 .footer nav a:hover { color: var(--text); }
 .footer small { color: var(--muted); }
+.footer__note { flex-basis: 100%; font-size: .75rem; opacity: .8; }
+.footer__note a { text-decoration: underline; }
 
 /* ============ Reveal ============ */
 .reveal { opacity: 0; transform: translateY(32px); transition: opacity .9s var(--ease), transform .9s var(--ease); }

@@ -78,34 +78,48 @@
   }
 
   /* ---------- Fleet data: popular rental cars ---------- */
+  // photo: Wikimedia Commons file name (free licence, credited on each card).
+  // engine/hp: common version of each model on the Iranian rental market.
   const CARS = [
-    { slug: "peugeot-207", fa: "پژو ۲۰۷", en: "Peugeot 207i", cat: "eco", body: "hatch", color: "#e9ecf1", gear: "اتوماتیک", seats: 5, fuel: "بنزینی" },
-    { slug: "peugeot-pars", fa: "پژو پارس", en: "Peugeot Pars", cat: "eco", body: "sedan", color: "#a7adb8", gear: "دنده‌ای", seats: 5, fuel: "بنزینی" },
-    { slug: "dena-plus", fa: "دنا پلاس", en: "IKCO Dena+", cat: "eco", body: "sedan", color: "#6b7280", gear: "اتوماتیک", seats: 5, fuel: "توربو" },
-    { slug: "tara", fa: "تارا", en: "IKCO Tara", cat: "eco", body: "sedan", color: "#2f6fd6", gear: "اتوماتیک", seats: 5, fuel: "بنزینی" },
-    { slug: "renault-l90", fa: "رنو تندر ۹۰", en: "Renault L90", cat: "eco", body: "sedan", color: "#f2f2f2", gear: "دنده‌ای", seats: 5, fuel: "بنزینی" },
-    { slug: "hyundai-elantra", fa: "هیوندای النترا", en: "Hyundai Elantra", cat: "mid", body: "sedan", color: "#1f2430", gear: "اتوماتیک", seats: 5, fuel: "بنزینی" },
-    { slug: "toyota-corolla", fa: "تویوتا کرولا", en: "Toyota Corolla", cat: "mid", body: "sedan", color: "#c8262d", gear: "اتوماتیک", seats: 5, fuel: "هیبرید" },
-    { slug: "kia-cerato", fa: "کیا سراتو", en: "Kia Cerato", cat: "mid", body: "sedan", color: "#dfe3ea", gear: "اتوماتیک", seats: 5, fuel: "بنزینی" },
-    { slug: "kia-sportage", fa: "کیا اسپورتیج", en: "Kia Sportage", cat: "suv", body: "suv", color: "#5b6270", gear: "اتوماتیک", seats: 5, fuel: "بنزینی" },
-    { slug: "hyundai-tucson", fa: "هیوندای توسان", en: "Hyundai Tucson", cat: "suv", body: "suv", color: "#21508f", gear: "اتوماتیک", seats: 5, fuel: "بنزینی" },
-    { slug: "chery-tiggo7", fa: "چری تیگو ۷ پرو", en: "Chery Tiggo 7 Pro", cat: "suv", body: "suv", color: "#b3242b", gear: "اتوماتیک", seats: 5, fuel: "توربو" },
-    { slug: "toyota-prado", fa: "تویوتا پرادو", en: "Toyota Land Cruiser Prado", cat: "suv", body: "suv", color: "#f0f0f0", gear: "اتوماتیک", seats: 7, fuel: "بنزینی" },
-    { slug: "toyota-camry", fa: "تویوتا کمری", en: "Toyota Camry", cat: "lux", body: "sedan", color: "#14161c", gear: "اتوماتیک", seats: 5, fuel: "هیبرید" },
-    { slug: "hyundai-sonata", fa: "هیوندای سوناتا", en: "Hyundai Sonata", cat: "lux", body: "sedan", color: "#2b3f6b", gear: "اتوماتیک", seats: 5, fuel: "هیبرید" },
-    { slug: "mercedes-e-class", fa: "مرسدس بنز کلاس E", en: "Mercedes-Benz E-Class", cat: "lux", body: "sedan", color: "#0f1115", gear: "اتوماتیک", seats: 5, fuel: "بنزینی" },
-    { slug: "bmw-5-series", fa: "بی‌ام‌و سری ۵", en: "BMW 5 Series", cat: "lux", body: "sedan", color: "#1d2a44", gear: "اتوماتیک", seats: 5, fuel: "بنزینی" },
+    { slug: "peugeot-207", fa: "پژو ۲۰۷", en: "Peugeot 207i", cat: "eco", body: "hatch", color: "#e9ecf1", gear: "دنده‌ای / اتوماتیک", seats: 5, fuel: "بنزینی", engine: "۱.۶ لیتر", hp: 110, photo: "Peugeot_207_front-1.JPG" },
+    { slug: "peugeot-pars", fa: "پژو پارس", en: "Peugeot Pars", cat: "eco", body: "sedan", color: "#a7adb8", gear: "دنده‌ای", seats: 5, fuel: "بنزینی", engine: "۱.۶ لیتر", hp: 110, photo: "Peugeot_Pars_01_17-6-2023.jpg" },
+    { slug: "dena-plus", fa: "دنا پلاس توربو", en: "IKCO Dena+ Turbo", cat: "eco", body: "sedan", color: "#6b7280", gear: "اتوماتیک ۶ سرعته", seats: 5, fuel: "بنزینی", engine: "۱.۷ توربو", hp: 150, photo: "Iran_Khodro_Dena_Plus_2018.jpg" },
+    { slug: "tara", fa: "تارا", en: "IKCO Tara", cat: "eco", body: "sedan", color: "#2f6fd6", gear: "دنده‌ای / اتوماتیک", seats: 5, fuel: "بنزینی", engine: "۱.۶ لیتر", hp: 110, photo: "IKCO_Tara_001.jpg" },
+    { slug: "renault-l90", fa: "رنو تندر ۹۰", en: "Renault Tondar 90 (L90)", cat: "eco", body: "sedan", color: "#f2f2f2", gear: "دنده‌ای", seats: 5, fuel: "بنزینی", engine: "۱.۶ لیتر", hp: 87, photo: "Renault_Tondar.jpg" },
+    { slug: "hyundai-elantra", fa: "هیوندای النترا", en: "Hyundai Elantra (AD)", cat: "mid", body: "sedan", color: "#1f2430", gear: "اتوماتیک ۶ سرعته", seats: 5, fuel: "بنزینی", engine: "۲.۰ لیتر", hp: 152, photo: "2016_Hyundai_Elantra_(AD)_Active_sedan_(2016-11-20).jpg" },
+    { slug: "toyota-corolla", fa: "تویوتا کرولا هیبرید", en: "Toyota Corolla Hybrid (E210)", cat: "mid", body: "sedan", color: "#c8262d", gear: "اتوماتیک CVT", seats: 5, fuel: "هیبرید", engine: "۱.۸ هیبرید", hp: 121, photo: "Toyota_Corolla_sedan_E210_hydrid.jpg" },
+    { slug: "kia-cerato", fa: "کیا سراتو", en: "Kia Cerato (BD)", cat: "mid", body: "sedan", color: "#dfe3ea", gear: "اتوماتیک ۶ سرعته", seats: 5, fuel: "بنزینی", engine: "۲.۰ لیتر", hp: 152, photo: "Kia_Cerato_1.6_EX_2019_(2).jpg" },
+    { slug: "kia-sportage", fa: "کیا اسپورتیج", en: "Kia Sportage (QL)", cat: "suv", body: "suv", color: "#5b6270", gear: "اتوماتیک ۶ سرعته", seats: 5, fuel: "بنزینی", engine: "۲.۴ لیتر", hp: 181, photo: "2016_Kia_Sportage_(QL_MY17)_Platinum_wagon_(2017-07-15)_01.jpg" },
+    { slug: "hyundai-tucson", fa: "هیوندای توسان", en: "Hyundai Tucson (TL)", cat: "suv", body: "suv", color: "#21508f", gear: "اتوماتیک ۶ سرعته", seats: 5, fuel: "بنزینی", engine: "۲.۰ لیتر", hp: 155, photo: "Hyundai_Tucson_TL.jpg" },
+    { slug: "chery-tiggo7", fa: "فونیکس تیگو ۷ پرو", en: "Fownix (Chery) Tiggo 7 Pro", cat: "suv", body: "suv", color: "#b3242b", gear: "اتوماتیک CVT", seats: 5, fuel: "بنزینی", engine: "۱.۵ توربو", hp: 156, photo: "Fownix_Tiggo_7_Pro_001.jpg" },
+    { slug: "toyota-prado", fa: "تویوتا پرادو", en: "Toyota Land Cruiser Prado (J150)", cat: "suv", body: "suv", color: "#f0f0f0", gear: "اتوماتیک", seats: 7, fuel: "بنزینی", engine: "۲.۷ لیتر", hp: 163, photo: "TOYOTA_LAND_CRUISER_PRADO_(J150)_China_(20)_(cropped).jpg" },
+    { slug: "toyota-camry", fa: "تویوتا کمری هیبرید", en: "Toyota Camry Hybrid (XV70)", cat: "lux", body: "sedan", color: "#14161c", gear: "اتوماتیک e‑CVT", seats: 5, fuel: "هیبرید", engine: "۲.۵ هیبرید", hp: 208, photo: "Toyota_Camry_XV70_01_China_2018-03-07.jpg" },
+    { slug: "hyundai-sonata", fa: "هیوندای سوناتا", en: "Hyundai Sonata (LF)", cat: "lux", body: "sedan", color: "#2b3f6b", gear: "اتوماتیک ۶ سرعته", seats: 5, fuel: "هیبرید", engine: "۲.۰ هیبرید", hp: 193, photo: "Hyundai_Sonata_2.0T_LF_white_(1).jpg" },
+    { slug: "mercedes-e-class", fa: "مرسدس بنز E200", en: "Mercedes-Benz E 200 (W213)", cat: "lux", body: "sedan", color: "#0f1115", gear: "اتوماتیک ۹ سرعته", seats: 5, fuel: "بنزینی", engine: "۲.۰ توربو", hp: 197, photo: "2020-09-22_MB-E200_W213-MOPF.jpg" },
+    { slug: "bmw-5-series", fa: "بی‌ام‌و ۵۲۰i", en: "BMW 520i (G30)", cat: "lux", body: "sedan", color: "#1d2a44", gear: "اتوماتیک ۸ سرعته", seats: 5, fuel: "بنزینی", engine: "۲.۰ توربو", hp: 184, photo: "Bmw_5_series_g30_blue_(1).jpg" },
   ];
   const CAT_LABEL = { eco: "اقتصادی", mid: "میان‌رده", suv: "شاسی‌بلند", lux: "لوکس" };
 
-  /* Swap the illustration for a real photo when assets/cars/<slug>.jpg exists. */
+  /* Photo order: local file in assets/cars/<slug>.jpg, then Wikimedia Commons.
+     If neither loads, the animated illustration stays. */
+  const commonsImg = (file, w = 800) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${w}`;
+  const commonsPage = (file) => `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(file)}`;
   function tryPhoto(media, car) {
+    const sources = [`assets/cars/${car.slug}.jpg`];
+    if (car.photo) sources.push(commonsImg(car.photo));
     const img = new Image();
     img.alt = car.fa;
-    img.loading = "lazy";
     img.decoding = "async";
-    img.onload = () => { media.querySelector(".car-svg")?.remove(); media.prepend(img); };
-    img.src = `assets/cars/${car.slug}.jpg`;
+    img.referrerPolicy = "no-referrer";
+    let i = 0;
+    img.onerror = () => { if (++i < sources.length) img.src = sources[i]; };
+    img.onload = () => {
+      media.querySelector(".car-svg")?.remove();
+      media.classList.add("has-photo");
+      media.prepend(img);
+      if (i > 0) media.querySelector(".car__credit")?.removeAttribute("hidden");
+    };
+    img.src = sources[0];
   }
 
   const grid = document.getElementById("fleetGrid");
@@ -115,12 +129,13 @@
         <div class="car__media">
           <span class="car__tag">${CAT_LABEL[c.cat]}</span>
           ${carSVG(c.body, c.color, { still: true })}
+          ${c.photo ? `<a class="car__credit" href="${commonsPage(c.photo)}" target="_blank" rel="noopener" hidden title="منبع عکس">© Wikimedia Commons</a>` : ""}
         </div>
         <div class="car__body">
           <h3>${c.fa}</h3>
           <div class="car__en">${c.en}</div>
           <ul class="car__specs">
-            <li>${c.gear}</li><li>${toFa(c.seats)} نفر</li><li>${c.fuel}</li>
+            <li>${c.engine} · ${toFa(c.hp)} اسب</li><li>${c.gear}</li><li>${toFa(c.seats)} نفر</li><li>${c.fuel}</li>
           </ul>
           <div class="car__foot">
             <small style="color:var(--muted)">موجود برای رزرو</small>
