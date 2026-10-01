@@ -155,8 +155,6 @@ i[data-i] svg { width: 1.15em; height: 1.15em; }
 .bk-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 6px 14px -10px rgba(30, 27, 75, .4); }
 .bk-card__img { position: relative; height: 82px; display: grid; place-items: center; color: #fff; background: var(--g); overflow: hidden; }
 .bk-card__img > svg { width: 30px; height: 30px; }
-.bk-card__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: fadeIn .6s ease both; }
-@keyframes fadeIn { from { opacity: 0; } }
 .bk-card__body { padding: 8px 10px 10px; }
 .bk-card__body b { display: block; font-size: 12px; }
 .bk-card__body small { color: var(--muted); font-size: 10px; }
@@ -182,30 +180,6 @@ i[data-i] svg { width: 1.15em; height: 1.15em; }
 .toast__btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
 .tb { display: flex; align-items: center; justify-content: center; gap: 4px; padding: 7px; border-radius: 10px; background: var(--indigo); color: #fff; font-weight: 700; font-size: 11px; }
 .tb--ok { background: #15803d; }
-
-/* ================= Car strip ================= */
-.cars { padding: 90px 0 60px; background: linear-gradient(180deg, var(--tint), #fff); }
-.cars__head { text-align: center; max-width: 720px; margin-bottom: 30px; }
-.cars__head h2 { font-size: clamp(1.6rem, 3.6vw, 2.4rem); font-weight: 900; }
-.cars__head p { color: var(--muted); }
-.cars__marquee { overflow: hidden; direction: ltr; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); padding: 10px 0 30px; }
-.cars__track { display: flex; gap: 20px; width: max-content; animation: slide 70s linear infinite; }
-.cars__marquee:hover .cars__track { animation-play-state: paused; }
-@keyframes slide { to { transform: translateX(calc(-50% - 10px)); } }
-.carcard {
-  direction: rtl; width: 260px; flex-shrink: 0; background: #fff; border-radius: 18px; overflow: hidden;
-  border: 1px solid var(--border); box-shadow: var(--shadow); transition: transform .5s var(--ease);
-}
-.carcard:hover { transform: translateY(-8px); }
-.carcard__img { position: relative; aspect-ratio: 16 / 10; display: grid; place-items: center; color: #fff; background: var(--g); overflow: hidden; }
-.carcard__img > svg { width: 46px; height: 46px; }
-.carcard__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); animation: fadeIn .6s ease both; }
-.carcard:hover .carcard__img img { transform: scale(1.07); }
-.carcard__img:not(.has-photo) .carcard__credit { display: none; }
-.carcard__credit { position: absolute; bottom: 6px; left: 8px; z-index: 2; font-size: 10px; color: #fff; opacity: .85; text-shadow: 0 1px 3px #000; direction: ltr; }
-.carcard__body { padding: 12px 16px 14px; }
-.carcard__body b { display: block; font-size: 1.02rem; }
-.carcard__body small { color: var(--muted); direction: ltr; display: block; text-align: right; }
 
 /* ================= Sections ================= */
 .section { padding: 110px 0; position: relative; }

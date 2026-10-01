@@ -54,52 +54,21 @@
   const svg = (name) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ""}</svg>`;
   const paintIcons = (root = document) => $$("i[data-i]", root).forEach((el) => { if (!el.firstChild) el.innerHTML = svg(el.dataset.i); });
 
-  /* ---------------- Car photos ----------------
-     photo = Wikimedia Commons file name (free licence), or a local path such as
-     "assets/cars/camry.jpg" to use your own fleet photos instead. */
-  const photoUrl = (p, w = 640) => p.startsWith("assets/") ? p
-    : `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(p)}?width=${w}`;
-  const photoPage = (p) => p.startsWith("assets/") ? null : `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(p)}`;
-
-  const PHOTOS = {
-    camry: "Toyota_Camry_XV70_01_China_2018-03-07.jpg",
-    elantra: "2016_Hyundai_Elantra_(AD)_Active_sedan_(2016-11-20).jpg",
-    cerato: "Kia_Cerato_1.6_EX_2019_(2).jpg",
-    corolla: "Toyota_Corolla_sedan_E210_hydrid.jpg",
-    tucson: "Hyundai_Tucson_TL.jpg",
-    sportage: "2016_Kia_Sportage_(QL_MY17)_Platinum_wagon_(2017-07-15)_01.jpg",
-    sonata: "Hyundai_Sonata_2.0T_LF_white_(1).jpg",
-    tiggo: "Fownix_Tiggo_7_Pro_001.jpg",
-    prado: "TOYOTA_LAND_CRUISER_PRADO_(J150)_China_(20)_(cropped).jpg",
-    eclass: "2020-09-22_MB-E200_W213-MOPF.jpg",
-    bmw5: "Bmw_5_series_g30_blue_(1).jpg",
-    dena: "Iran_Khodro_Dena_Plus_2018.jpg",
-  };
+  /* Card colours for the phone mockups (as in the brochure). */
   const G = {
     blue: "linear-gradient(120deg,#0ea5e9,#1e3a8a)", pink: "linear-gradient(120deg,#ec4899,#7c3aed)",
     green: "linear-gradient(120deg,#10b981,#0ea5e9)", violet: "linear-gradient(120deg,#6366f1,#a855f7)",
     orange: "linear-gradient(120deg,#f59e0b,#ef4444)", slate: "linear-gradient(120deg,#475569,#1e293b)",
   };
 
-  // Load the photo into `box`; on failure the gradient + car icon stays.
-  function loadPhoto(box, photo, w) {
-    if (!photo) return;
-    const img = new Image();
-    img.alt = "";
-    img.decoding = "async";
-    img.referrerPolicy = "no-referrer";
-    img.onload = () => { box.appendChild(img); box.classList.add("has-photo"); };
-    img.src = photoUrl(photo, w);
-  }
-
   /* Sample listings shown inside the phone mockups (prices are illustrative). */
   const LISTINGS = [
-    { fa: "تویوتا کمری ۲۰۲۲", en: "Toyota Camry 2022", at: "airport", price: 4500000, g: G.blue, photo: PHOTOS.camry },
-    { fa: "هیوندای النترا", en: "Hyundai Elantra", at: "hotel", price: 3200000, g: G.pink, photo: PHOTOS.elantra },
-    { fa: "کیا سراتو", en: "Kia Cerato", at: "port", price: 2900000, g: G.green, photo: PHOTOS.cerato },
-    { fa: "هیوندای توسان", en: "Hyundai Tucson", at: "hotel", price: 5200000, g: G.violet, photo: PHOTOS.tucson },
-    { fa: "تویوتا کرولا ۲۰۲۱", en: "Toyota Corolla 2021", at: "airport", price: 3800000, g: G.orange, photo: PHOTOS.corolla },
-    { fa: "کیا اسپورتیج", en: "Kia Sportage", at: "port", price: 4900000, g: G.slate, photo: PHOTOS.sportage },
+    { fa: "تویوتا کمری ۲۰۲۲", en: "Toyota Camry 2022", at: "airport", price: 4500000, g: G.blue },
+    { fa: "هیوندای النترا", en: "Hyundai Elantra", at: "hotel", price: 3200000, g: G.pink },
+    { fa: "کیا سراتو", en: "Kia Cerato", at: "port", price: 2900000, g: G.green },
+    { fa: "هیوندای توسان", en: "Hyundai Tucson", at: "hotel", price: 5200000, g: G.violet },
+    { fa: "تویوتا کرولا ۲۰۲۱", en: "Toyota Corolla 2021", at: "airport", price: 3800000, g: G.orange },
+    { fa: "کیا اسپورتیج", en: "Kia Sportage", at: "port", price: 4900000, g: G.slate },
   ];
 
   const T = {
@@ -124,19 +93,17 @@
     const name = lang === "fa" ? car.fa : car.en;
     const price = lang === "fa" ? toFa(fmt(car.price)) : fmt(car.price);
     return `<div class="bk-card">
-      <div class="bk-card__img" style="--g:${car.g}" data-photo="${car.photo}">${svg("car")}</div>
+      <div class="bk-card__img" style="--g:${car.g}">${svg("car")}</div>
       <div class="bk-card__body"><b>${name}</b><small>${t.deliv} ${t.at[car.at]}</small>
         <div class="bk-card__row"><strong>${price} ${t.day}</strong><em>${t.book}</em></div></div>
     </div>`;
   }
-  const hydratePhotos = (root) => $$("[data-photo]", root).forEach((b) => loadPhoto(b, b.dataset.photo, 480));
 
   /* Hero phone: endless Persian listing feed (list duplicated for a seamless loop) */
   const heroList = $("#heroList");
   if (heroList) {
     const html = LISTINGS.map((c) => cardHTML(c, "fa")).join("");
     heroList.innerHTML = html + html;
-    hydratePhotos(heroList);
   }
 
   /* Hero toast: a new online order pops up periodically */
@@ -163,35 +130,6 @@
     setTimeout(tick, 600);
   }
 
-  /* ---------------- Car strip ---------------- */
-  const STRIP = [
-    { fa: "تویوتا کمری", en: "Toyota Camry", g: G.blue, photo: PHOTOS.camry },
-    { fa: "هیوندای النترا", en: "Hyundai Elantra", g: G.pink, photo: PHOTOS.elantra },
-    { fa: "کیا سراتو", en: "Kia Cerato", g: G.green, photo: PHOTOS.cerato },
-    { fa: "تویوتا کرولا", en: "Toyota Corolla", g: G.orange, photo: PHOTOS.corolla },
-    { fa: "هیوندای توسان", en: "Hyundai Tucson", g: G.violet, photo: PHOTOS.tucson },
-    { fa: "کیا اسپورتیج", en: "Kia Sportage", g: G.slate, photo: PHOTOS.sportage },
-    { fa: "هیوندای سوناتا", en: "Hyundai Sonata", g: G.blue, photo: PHOTOS.sonata },
-    { fa: "فونیکس تیگو ۷ پرو", en: "Fownix Tiggo 7 Pro", g: G.pink, photo: PHOTOS.tiggo },
-    { fa: "تویوتا پرادو", en: "Toyota Land Cruiser Prado", g: G.green, photo: PHOTOS.prado },
-    { fa: "مرسدس بنز E200", en: "Mercedes-Benz E-Class", g: G.slate, photo: PHOTOS.eclass },
-    { fa: "بی‌ام‌و سری ۵", en: "BMW 5 Series", g: G.violet, photo: PHOTOS.bmw5 },
-    { fa: "دنا پلاس", en: "IKCO Dena+", g: G.orange, photo: PHOTOS.dena },
-  ];
-  const track = $("#carTrack");
-  if (track) {
-    const card = (c, hidden) => {
-      const page = photoPage(c.photo);
-      return `<article class="carcard"${hidden ? ' aria-hidden="true"' : ""}>
-        <div class="carcard__img" style="--g:${c.g}" data-photo="${c.photo}">${svg("car")}
-          ${page ? `<a class="carcard__credit" href="${page}" target="_blank" rel="noopener"${hidden ? ' tabindex="-1"' : ""}>© Wikimedia Commons</a>` : ""}</div>
-        <div class="carcard__body"><b>${c.fa}</b><small>${c.en}</small></div>
-      </article>`;
-    };
-    track.innerHTML = STRIP.map((c) => card(c, false)).join("") + STRIP.map((c) => card(c, true)).join("");
-    $$("[data-photo]", track).forEach((b) => loadPhoto(b, b.dataset.photo, 640));
-  }
-
   /* ---------------- Language phone ---------------- */
   const langScreen = $("#langScreen");
   const langList = $("#langList");
@@ -204,7 +142,6 @@
       langScreen.lang = code;
       $$("[data-t]", langScreen).forEach((el) => { el.textContent = t[el.dataset.t]; });
       langList.innerHTML = [LISTINGS[0], LISTINGS[3]].map((c) => cardHTML(c, code)).join("");
-      hydratePhotos(langList);
       langScreen.classList.remove("is-swapping");
     };
     $$(".lang", chipsBox).forEach((b) => { const on = b.dataset.lang === code; b.classList.toggle("is-on", on); b.setAttribute("aria-pressed", on); });
