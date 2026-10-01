@@ -18,6 +18,8 @@
   --warn: #ffb04a;
   --on-brand: #ffffff;
   --on-flap: #1a1405;
+  --wa: #25d366;          /* WhatsApp green */
+  --on-wa: #062b16;
   /* type */
   --display: "Lalezar", "Vazirmatn", Tahoma, sans-serif;
   --body: "Vazirmatn", Tahoma, "Segoe UI", sans-serif;
@@ -69,6 +71,11 @@ i[data-i] svg { width: 1.15em; height: 1.15em; }
 .btn--brand:hover { transform: translateY(-2px); box-shadow: 0 16px 36px -12px var(--brand); }
 .btn--ghost { color: var(--fg); border-color: var(--line); background: var(--bg-2); }
 .btn--ghost:hover { background: var(--bg-3); }
+.btn--wa { background: var(--wa); color: var(--on-wa); box-shadow: 0 10px 30px -14px var(--wa); }
+.btn--wa:hover { transform: translateY(-2px); }
+.btn--wa i[data-i] svg { width: 1.3em; height: 1.3em; }
+.btn--light { background: var(--fg); color: var(--bg); }
+.btn--light:hover { transform: translateY(-2px); }
 .btn i[data-i] { transition: transform .3s var(--ease); }
 .btn:hover i[data-i] { transform: translateX(-4px); }
 
@@ -98,6 +105,7 @@ i[data-i] svg { width: 1.15em; height: 1.15em; }
 .logo__word b { color: var(--brand-2); }
 .nav__links { display: flex; align-items: center; gap: 26px; font-size: .95rem; color: var(--fg-2); }
 .nav__links a:not(.btn):hover { color: var(--fg); }
+.nav__wa { display: inline-flex; align-items: center; gap: 6px; color: var(--wa) !important; font-weight: 700; }
 .nav__burger { display: none; width: 44px; height: 44px; position: relative; border: 0; background: none; color: var(--fg); cursor: pointer; }
 .nav__burger span { position: absolute; right: 11px; width: 22px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .3s var(--ease), opacity .3s; }
 .nav__burger span:nth-child(1) { top: 15px; } .nav__burger span:nth-child(2) { top: 21px; } .nav__burger span:nth-child(3) { top: 27px; }
@@ -391,8 +399,14 @@ input[type="range"] { width: 100%; accent-color: var(--brand); height: 28px; cur
 .end__text h2 { font: 400 var(--fs-h2)/1.3 var(--display); }
 .end__text p { opacity: .9; }
 .end__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
-.end .btn--brand { background: var(--fg); color: var(--bg); box-shadow: none; }
-.end__url { font: 700 1rem var(--mono); opacity: .9; user-select: all; }
+.contact-line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: .95rem; }
+.phone-num { font: 800 1.35rem/1 var(--body); letter-spacing: .03em; user-select: all; }
+.copy {
+  display: inline-flex; align-items: center; gap: 6px; font: 700 .82rem var(--body); cursor: pointer;
+  padding: 6px 12px; border-radius: 99px; border: 1px solid color-mix(in srgb, var(--on-brand) 45%, transparent);
+  background: transparent; color: var(--on-brand);
+}
+.copy:hover { background: color-mix(in srgb, var(--on-brand) 14%, transparent); }
 .devices { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: .9rem; opacity: .9; }
 .devices li { display: inline-flex; align-items: center; gap: 6px; }
 .qr { display: grid; gap: 8px; justify-items: center; }
@@ -408,6 +422,23 @@ input[type="range"] { width: 100%; accent-color: var(--brand); height: 28px; cur
 .foot { border-top: 1px solid var(--line); padding-block: 30px 40px; }
 .foot__in { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; color: var(--mute); font-size: .9rem; }
 .foot small { flex-basis: 100%; font-size: .8rem; }
+.foot__wa { display: inline-flex; align-items: center; gap: 6px; color: var(--wa); font-weight: 700; }
+
+/* floating WhatsApp button */
+.wa-fab {
+  position: fixed; z-index: 60; left: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px 12px 14px; border-radius: 99px;
+  background: var(--wa); color: var(--on-wa); font-weight: 800; font-size: .95rem;
+  box-shadow: 0 14px 34px -10px color-mix(in srgb, var(--wa) 70%, transparent);
+  transition: transform .3s var(--ease);
+}
+.wa-fab:hover { transform: translateY(-3px); }
+.wa-fab i svg { width: 1.45em; height: 1.45em; }
+.wa-fab::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; border: 2px solid var(--wa);
+  animation: waRing 2.4s ease-out infinite; pointer-events: none;
+}
+@keyframes waRing { from { transform: scale(1); opacity: .8; } to { transform: scale(1.35); opacity: 0; } }
 
 /* Persian digits: the mono face has none, so numbers use the body face with tabular figures */
 .brow__time, .board__count b, .sky__clock b, .moment time, .field output, .receipt__lines dd, .jar b, .receipt__total b, .plate span {
@@ -451,7 +482,9 @@ input[type="range"] { width: 100%; accent-color: var(--brand); height: 28px; cur
 }
 @media (max-width: 560px) {
   .hero { padding-block: 32px 56px; }
-  .hero__cta .btn { flex: 1 1 100%; }
+  .hero__cta .btn, .end__cta .btn { flex: 1 1 100%; }
+  .wa-fab span { display: none; }
+  .wa-fab { padding: 14px; }
   .spec, .spec--3, .trust__list { grid-template-columns: minmax(0, 1fr); }
   .moment { grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 20px 16px; }
   .jars { grid-template-columns: minmax(0, 1fr); }

@@ -42,6 +42,8 @@
     smartphone: '<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/>',
     tablet: '<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M12 18h.01"/>',
     laptop: '<path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.3 2.6a1 1 0 0 1-.9 1.4H3.6a1 1 0 0 1-.9-1.4L4 16"/>',
+    whatsapp: '<path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9.2 8.4c.2-.5.9-.6 1.2-.2l.8 1.2c.2.3.1.7-.1.9l-.5.5c.5 1.1 1.4 2 2.5 2.5l.5-.5c.3-.2.7-.3.9-.1l1.2.8c.4.3.3 1-.2 1.2-.7.3-1.5.4-2.3.1a7.5 7.5 0 0 1-4.1-4.1c-.3-.8-.2-1.6.1-2.3z" fill="currentColor" stroke="none"/>',
+    copy: '<rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
     browser: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M21.2 8H12M3.9 6.1 8.5 14M10.9 21.9 15.5 14"/>',
   };
   $$("i[data-i]").forEach((el) => {
@@ -269,6 +271,18 @@
   toggle.addEventListener("click", () => setMenu(!links.classList.contains("is-open")));
   links.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
   addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+
+  /* copy WhatsApp number */
+  const copyBtn = $("#copyNum");
+  if (copyBtn) {
+    const label = $("span", copyBtn);
+    const done = (txt) => { label.textContent = txt; setTimeout(() => { label.textContent = "کپی شماره"; }, 1800); };
+    copyBtn.addEventListener("click", () => {
+      const num = copyBtn.dataset.copy;
+      const fallback = () => { const r = document.createRange(); r.selectNodeContents($("#waNumber")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); done("انتخاب شد"); };
+      try { navigator.clipboard.writeText(num).then(() => done("کپی شد"), fallback); } catch { fallback(); }
+    });
+  }
 
   $("#year").textContent = faDigits(new Date().getFullYear());
 })();
