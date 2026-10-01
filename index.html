@@ -1,323 +1,354 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>kfzocar | سامانه‌ی مدیریت اجاره خودرو</title>
-  <meta name="description" content="kfzocar سامانه‌ی مدیریت اجاره خودرو ویژه‌ی رنت‌کاران کیش؛ از ثبت قرارداد و ودیعه تا تسویه، چک، خلافی و گزارش حسابداری، به‌همراه صفحه‌ی رزرو آنلاین به ۴۰ زبان.">
-  <meta name="theme-color" content="#4338ca">
-  <link rel="canonical" href="https://kfzocar.ir/">
-  <meta property="og:title" content="kfzocar | سامانه‌ی مدیریت اجاره خودرو">
-  <meta property="og:description" content="مدیریت اجاره خودرو؛ هوشمند، ساده، بی‌دغدغه. ویژه‌ی رنت‌کاران کیش.">
-  <meta property="og:url" content="https://kfzocar.ir/">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>kfzocar</title>
+<meta name="description" content="kfzocar سامانه‌ی مدیریت اجاره خودرو ویژه‌ی رنت‌کاران کیش؛ قرارداد، ودیعه، تسویه، چک، خلافی، حسابداری و رزرو آنلاین به ۴۰ زبان. بدون نصب، روی موبایل و کامپیوتر.">
+<meta name="theme-color" content="#0d0b1e">
+<link rel="canonical" href="https://kfzocar.ir/">
+<meta property="og:title" content="kfzocar — سامانه‌ی مدیریت اجاره خودرو">
+<meta property="og:description" content="از فرودگاه کیش تا تسویه‌ی ودیعه؛ همه‌ی کار دفتر رنت در یک سامانه.">
+<meta property="og:url" content="https://kfzocar.ir/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-<div class="progress" id="progress" aria-hidden="true"></div>
-
 <header class="nav" id="nav">
-  <div class="container nav__inner">
-    <a href="#top" class="logo" aria-label="kfzocar">
+  <div class="wrap nav__in">
+    <a href="#top" class="logo" aria-label="kfzocar، صفحه‌ی اول">
       <span class="logo__mark"><i data-i="car"></i></span>
-      <span class="logo__text">kfzo<b>car</b></span>
+      <span class="logo__word">kfzo<b>car</b></span>
     </a>
     <nav class="nav__links" id="navLinks" aria-label="منوی اصلی">
-      <a href="#why">چرا kfzocar</a>
-      <a href="#fleet">ناوگان و قرارداد</a>
-      <a href="#finance">مالی و حسابداری</a>
-      <a href="#online">رزرو آنلاین</a>
-      <a href="#security">امنیت</a>
-      <a href="https://app.kfzocar.ir" class="btn btn--primary btn--sm">ورود به سامانه</a>
+      <a href="#day">یک روز در دفتر</a>
+      <a href="#fleet">ناوگان</a>
+      <a href="#money">تسویه و حساب</a>
+      <a href="#guests">رزرو آنلاین</a>
+      <a href="#trust">امنیت</a>
+      <a href="https://app.kfzocar.ir" class="btn btn--brand btn--sm">ورود به سامانه</a>
     </nav>
-    <button class="nav__burger" id="navToggle" aria-label="منو" aria-expanded="false" aria-controls="navLinks">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="nav__burger" id="navToggle" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
   </div>
 </header>
 
 <main id="top">
 
-  <!-- ================= HERO ================= -->
+  <!-- ============ HERO: the live arrivals board ============ -->
   <section class="hero">
-    <div class="hero__dots" aria-hidden="true"></div>
-    <div class="hero__glow" aria-hidden="true"><i></i><i></i></div>
-
-    <div class="container hero__grid">
-      <div class="hero__text">
-        <span class="tag tag--glass reveal"><i data-i="pin"></i>ویژه‌ی رنت‌کاران کیش</span>
-        <h1 class="reveal">
-          مدیریت اجاره خودرو
-          <span class="hero__accent"><span class="typed" id="typed">هوشمند، ساده، بی‌دغدغه</span></span>
-        </h1>
-        <p class="hero__lead reveal">
-          از ثبت قرارداد و ودیعه تا تسویه، چک، خلافی و گزارش حسابداری؛
-          همه در یک سامانه — روی موبایل و کامپیوتر، بدون نصب.
+    <div class="wrap">
+      <p class="eyebrow"><i data-i="pin"></i>ویژه‌ی رنت‌کاران کیش</p>
+      <h1 class="hero__title">
+        <span class="hero__l1">مسافر از هواپیما پیاده می‌شود،</span>
+        <span class="hero__l2">قراردادش آماده است.</span>
+      </h1>
+      <div class="hero__row">
+        <p class="hero__lead">
+          kfzocar سامانه‌ی مدیریت اجاره خودرو است: از رزرو آنلاین و ثبت قرارداد و ودیعه تا تسویه، چک، خلافی و گزارش حسابداری.
+          روی موبایل و کامپیوتر، بدون نصب.
         </p>
-
-        <div class="hero__tiles reveal">
-          <div class="tile"><span class="tile__ic"><i data-i="languages"></i></span>رزرو آنلاین به ۴۰ زبان</div>
-          <div class="tile"><span class="tile__ic"><i data-i="shield"></i></span>ودیعه همیشه جدا از درآمد</div>
-          <div class="tile"><span class="tile__ic"><i data-i="bell"></i></span>اعلان فوری سفارش جدید</div>
-          <div class="tile"><span class="tile__ic"><i data-i="cloud"></i></span>پشتیبان‌گیری خودکار روزانه</div>
+        <div class="hero__cta">
+          <a href="https://app.kfzocar.ir" class="btn btn--brand btn--lg">ورود به سامانه <i data-i="arrow"></i></a>
+          <a href="#contact" class="btn btn--ghost btn--lg">درخواست دمو</a>
         </div>
-
-        <div class="hero__cta reveal">
-          <a href="https://app.kfzocar.ir" class="btn btn--light btn--lg">ورود به سامانه <i data-i="arrow"></i></a>
-          <a href="#contact" class="btn btn--glass btn--lg">درخواست دمو</a>
-        </div>
-
-        <ul class="hero__stats reveal">
-          <li><b data-count="40">۰</b><span>زبان</span></li>
-          <li><b>۲۴/۷</b><span>دسترسی</span></li>
-          <li><b>۰</b><span>نصب</span></li>
-        </ul>
       </div>
 
-      <!-- phone: Persian booking page -->
-      <div class="hero__phone reveal" aria-hidden="true">
-        <div class="phone phone--tilt" id="heroPhone">
-          <div class="phone__notch"></div>
-          <div class="phone__screen">
-            <div class="bk-head">
-              <span class="bk-live"><i></i>۲۴ خودرو آزاد امروز</span>
-              <b>خودروی سفرت را همین‌جا رزرو کن</b>
-              <div class="bk-search"><i data-i="search"></i>جست‌وجوی برند یا مدل…</div>
-            </div>
-            <div class="bk-chips"><span class="on">همه</span><span>تویوتا</span><span>هیوندای</span><span>کیا</span></div>
-            <div class="bk-list"><div class="bk-track" id="heroList"></div></div>
+      <div class="board" aria-label="نمونه‌ی تابلوی سفارش‌های آنلاین">
+        <div class="board__head">
+          <div class="board__title"><i data-i="plane"></i><b>سفارش‌های آنلاین امروز</b><span>فرودگاه بین‌المللی کیش</span></div>
+          <div class="board__meta">
+            <span class="live"><i></i>زنده</span>
+            <span class="board__count">سفارش امروز: <b id="orderCount">۱۸</b></span>
           </div>
         </div>
-
-        <div class="toast" id="heroToast">
-          <div class="toast__head"><span class="toast__dot"></span><b>درخواست رزرو آنلاین جدید</b></div>
-          <p><b dir="ltr">Sara M.</b> — تویوتا کرولا ۲۰۲۱ — ۳ روز</p>
-          <p class="toast__sub"><i data-i="pin"></i>فرودگاه بین‌المللی کیش · پرواز <span dir="ltr">EK 975</span></p>
-          <div class="toast__btns"><span class="tb tb--ok"><i data-i="phone"></i>تماس</span><span class="tb"><i data-i="file"></i>ثبت قرارداد</span></div>
+        <div class="board__cols" aria-hidden="true">
+          <span>ساعت</span><span>پرواز</span><span>مسافر</span><span>زبان</span><span>خودرو</span><span>تحویل</span><span>وضعیت</span>
         </div>
-      </div>
-    </div>
-
-    <a href="#why" class="scroll-cue" aria-label="ادامه"><span></span></a>
-  </section>
-
-  <!-- ================= WHY ================= -->
-  <section class="section" id="why">
-    <div class="container">
-      <header class="head reveal">
-        <span class="tag"><i data-i="smile"></i>چرا kfzocar؟</span>
-        <h2>دغدغه‌هایی که <span class="grad-text">دیگر ندارید</span></h2>
-        <p>هر روزِ یک رنت‌کار پر از جزئیاتی است که اگر از دست برود، پول از دست می‌رود. این سامانه برای همین جزئیات ساخته شده است.</p>
-      </header>
-
-      <div class="pains">
-        <article class="pain reveal">
-          <div class="pain__q"><i data-i="x"></i>ودیعه‌ها با درآمد قاطی می‌شوند</div>
-          <div class="pain__a"><i data-i="check"></i>ودیعه همیشه جدا از درآمد نگهداری و گزارش می‌شود؛ با شماره پیگیری عودت، قابل ارائه به حسابدار و دارایی.</div>
-        </article>
-        <article class="pain reveal">
-          <div class="pain__q"><i data-i="x"></i>یک خودرو برای دو نفر رزرو شد</div>
-          <div class="pain__a"><i data-i="check"></i>تقویم ناوگان و کنترل خودکار تداخل؛ خودروی رزروشده دیگر برای همان روزها قابل رزرو نیست.</div>
-        </article>
-        <article class="pain reveal">
-          <div class="pain__q"><i data-i="x"></i>خلافی بعد از تحویل خودرو رسید</div>
-          <div class="pain__a"><i data-i="check"></i>ثبت جریمه و خسارت حتی بعد از بستن قرارداد، و پیگیری بدهی تا وصول کامل.</div>
-        </article>
-        <article class="pain reveal">
-          <div class="pain__q"><i data-i="x"></i>حساب چک‌ها و صندوق‌ها از دست رفته</div>
-          <div class="pain__a"><i data-i="check"></i>چک امانت و پرداخت، صندوق‌ها و حساب‌های بانکی — حتی ارزی — با موجودی لحظه‌ای.</div>
-        </article>
-        <article class="pain reveal">
-          <div class="pain__q"><i data-i="x"></i>مسافر خارجی زبان ما را نمی‌فهمد</div>
-          <div class="pain__a"><i data-i="check"></i>صفحه‌ی رزرو آنلاین به ۴۰ زبان، که خودش زبان گوشی مسافر را تشخیص می‌دهد.</div>
-        </article>
-        <article class="pain reveal">
-          <div class="pain__q"><i data-i="x"></i>نمی‌دانم کدام خودرو سود می‌دهد</div>
-          <div class="pain__a"><i data-i="check"></i>تحلیل سود و زیان هر خودرو با همه‌ی هزینه‌ها، و پیشنهاد برای چینش بهتر ناوگان.</div>
-        </article>
+        <ol class="board__rows" id="boardRows"></ol>
+        <p class="board__note">داده‌ها نمونه هستند. در سامانه، هر سفارش همان لحظه با صدا روی موبایل یا کامپیوتر دفتر ظاهر می‌شود.</p>
       </div>
 
-      <blockquote class="quote reveal">
-        <i data-i="quote"></i>
-        هیچ عددی بی‌صدا عوض نمی‌شود: هر تراکنش، هر تغییر و هر ابطال با نام کاربر و زمان ثبت می‌شود.
-      </blockquote>
-
-      <div class="band reveal">
-        <div><b data-count="1">۰</b><span>سامانه</span><small>به‌جای دفتر، اکسل و کاغذ</small></div>
-        <div><b data-count="40">۰</b><span>زبان</span><small>برای مسافران داخلی و خارجی</small></div>
-        <div><b>هر روز</b><small>پشتیبان‌گیری خودکار</small></div>
-      </div>
+      <ul class="facts">
+        <li><b>۴۰</b><span>زبان برای صفحه‌ی رزرو مسافر</span></li>
+        <li><b>۰</b><span>نصب؛ فقط مرورگر</span></li>
+        <li><b>۲۴/۷</b><span>دسترسی از هر دستگاه</span></li>
+        <li><b>هر شب</b><span>پشتیبان‌گیری خودکار</span></li>
+      </ul>
     </div>
   </section>
 
-  <!-- ================= FLEET & CONTRACT ================= -->
-  <section class="section section--tint" id="fleet">
-    <div class="container">
-      <header class="head reveal">
-        <span class="tag"><i data-i="car"></i>ناوگان و قرارداد</span>
-        <h2>از تحویل تا برگشت، <span class="grad-text">بدون کاغذبازی</span></h2>
-        <p>قرارداد در چند ثانیه ثبت می‌شود، خودرو در لحظه از ناوگان آزاد کم می‌شود و همه‌چیز تا روز برگشت زیر نظر است.</p>
+  <!-- ============ A DAY AT THE DESK ============ -->
+  <section class="day" id="day">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow eyebrow--plain">یک روز در دفتر رنت کیش</p>
+        <h2>هر ساعتِ روز یک جزئیات دارد<br>که اگر از دست برود، پول از دست می‌رود.</h2>
       </header>
 
-      <div class="features">
-        <article class="feat reveal"><span class="feat__ic g-violet"><i data-i="file"></i></span><div><h3>قرارداد سریع و چاپ</h3><p>ثبت قرارداد با ودیعه در یک صفحه و چاپ قرارداد رسمی با شرایط و مقررات اختصاصی مجموعه‌ی شما.</p></div></article>
-        <article class="feat reveal"><span class="feat__ic g-blue"><i data-i="calendar"></i></span><div><h3>تقویم ناوگان و رزرو</h3><p>نمای روزبه‌روز همه‌ی خودروها؛ رزرو تلفنی با یک لمس و جلوگیری خودکار از رزرو دوباره.</p></div></article>
-        <article class="feat reveal"><span class="feat__ic g-teal"><i data-i="clipboard"></i></span><div><h3>بازدید تحویل و برگشت</h3><p>ثبت سوخت، کیلومتر، وضعیت ظاهری و عکس آسیب‌ها؛ هنگام برگشت همه‌چیز قابل مقایسه است.</p></div></article>
-        <article class="feat reveal"><span class="feat__ic g-orange"><i data-i="gauge"></i></span><div><h3>سقف کیلومتر روزانه</h3><p>تعیین سقف کیلومتر و محاسبه‌ی خودکار هزینه‌ی کیلومتر اضافه در تسویه.</p></div></article>
-        <article class="feat reveal"><span class="feat__ic g-pink"><i data-i="refresh"></i></span><div><h3>تمدید و ویرایش</h3><p>تمدید قرارداد با بررسی خودکار رزروهای بعدی همان خودرو.</p></div></article>
-        <article class="feat reveal"><span class="feat__ic g-green"><i data-i="bell"></i></span><div><h3>هشدارهای به‌موقع</h3><p>بیمه، معاینه فنی، سرویس روغن و لاستیک بر اساس کیلومتر، و برگشت‌های امروز و دیرکرد.</p></div></article>
-        <article class="feat reveal"><span class="feat__ic g-red"><i data-i="idcard"></i></span><div><h3>پرونده‌ی کامل مشتری</h3><p>مدارک (گواهینامه، کارت ملی، گذرنامه)، تاریخچه‌ی قراردادها و لیست سیاه مشتریان بدحساب.</p></div></article>
-        <article class="feat reveal"><span class="feat__ic g-slate"><i data-i="message"></i></span><div><h3>پیامک به مشتری</h3><p>خلاصه‌ی قرارداد و یادآوری روز قبل از برگشت خودرو (قابل فعال‌سازی).</p></div></article>
-      </div>
-
-      <div class="band band--icons reveal">
-        <div><i data-i="smartphone"></i><small>کار با موبایل، تبلت و کامپیوتر</small></div>
-        <div><i data-i="users"></i><small>چند کاربر با سطح دسترسی جدا</small></div>
-        <div><i data-i="moon"></i><small>حالت شب برای شیفت‌های شبانه</small></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= FINANCE ================= -->
-  <section class="section" id="finance">
-    <div class="container">
-      <header class="head reveal">
-        <span class="tag"><i data-i="wallet"></i>مالی و حسابداری</span>
-        <h2>حساب‌وکتابی که <span class="grad-text">به آن اعتماد می‌کنید</span></h2>
-        <p>هر ریال جای خودش را دارد: درآمد، ودیعه، بدهی، چک و هزینه — جدا، شفاف و قابل ارائه به حسابدار.</p>
-      </header>
-
-      <div class="finance">
-        <div class="ledger reveal" aria-hidden="true">
-          <div class="ledger__top"><b>تسویه‌ی قرارداد</b><span>تویوتا کمری ۲۰۲۲ — قرارداد ۴ روزه</span></div>
-          <ul class="ledger__rows">
-            <li><span>اجاره ۴ روز</span><b>۱۸,۰۰۰,۰۰۰</b></li>
-            <li><span>کیلومتر اضافه (۶۰ کم)</span><b>۱,۲۰۰,۰۰۰</b></li>
-            <li class="neg"><span>خلافی ثبت‌شده</span><b>۴۵۰,۰۰۰</b></li>
-            <li class="dep"><span>ودیعه‌ی دریافتی</span><b>۳۰,۰۰۰,۰۰۰</b></li>
-          </ul>
-          <div class="ledger__bar"><span style="--w:66%"></span></div>
-          <div class="ledger__sum"><span>عودت ودیعه</span><b id="refund">۰</b><small>تومان</small></div>
-          <div class="ledger__stamp"><i data-i="checks"></i>تسویه شد</div>
+      <div class="day__grid">
+        <div class="sky" id="sky" aria-hidden="true">
+          <div class="sky__stars"></div>
+          <div class="sky__sun"></div>
+          <div class="sky__sea"><i></i><i></i><i></i></div>
+          <div class="sky__clock"><b id="skyTime">۰۷:۴۵</b><span id="skyLabel">صبح، فرودگاه</span></div>
         </div>
 
-        <div class="features features--2">
-          <article class="feat reveal"><span class="feat__ic g-violet"><i data-i="safe"></i></span><div><h3>ودیعه جدا از درآمد</h3><p>گزارش ویژه‌ی ودیعه‌ها برای اثبات اینکه امانت بوده و به مشتری برگشته است.</p></div></article>
-          <article class="feat reveal"><span class="feat__ic g-teal"><i data-i="checks"></i></span><div><h3>تسویه‌ی نهایی بی‌خطا</h3><p>بدهی مشتری از ودیعه کسر و باقی‌مانده عودت می‌شود؛ هیچ مبلغی دو بار گرفته نمی‌شود.</p></div></article>
-          <article class="feat reveal"><span class="feat__ic g-blue"><i data-i="wallet"></i></span><div><h3>صندوق‌ها و حساب‌ها</h3><p>چند صندوق و حساب بانکی، حتی ارزی (دلار، یورو، درهم…)، با صورت‌حساب و موجودی هر کدام.</p></div></article>
-          <article class="feat reveal"><span class="feat__ic g-orange"><i data-i="bank"></i></span><div><h3>مدیریت چک</h3><p>چک امانت و چک پرداختی؛ وصول، عودت و برگشت با یک کلیک و هشدار چک‌های نزد مجموعه.</p></div></article>
-          <article class="feat reveal"><span class="feat__ic g-pink"><i data-i="receipt"></i></span><div><h3>همه‌ی هزینه‌ها</h3><p>تعمیر، سوخت، بیمه، سرویس، لاستیک، تجهیزات خودرو و هزینه‌های دفتر با دسته‌بندی دلخواه.</p></div></article>
-          <article class="feat reveal"><span class="feat__ic g-green"><i data-i="chart"></i></span><div><h3>سود و زیان هر خودرو</h3><p>ببینید کدام خودرو پول می‌سازد و کدام هزینه؛ همراه با پیشنهاد فروش خودروهای زیان‌ده.</p></div></article>
-          <article class="feat reveal"><span class="feat__ic g-red"><i data-i="hourglass"></i></span><div><h3>بدهی معوق مشتریان</h3><p>فهرست بدهکاران به تفکیک سن بدهی (۳۰، ۶۰، ۹۰ روز) با تماس مستقیم.</p></div></article>
-          <article class="feat reveal"><span class="feat__ic g-slate"><i data-i="sheet"></i></span><div><h3>گزارش برای حسابدار</h3><p>گزارش دوره‌ای قابل تطبیق با صورت‌حساب بانکی، چاپ و خروجی برای اکسل.</p></div></article>
-        </div>
-      </div>
-
-      <div class="band reveal">
-        <div><b>۰</b><small>تراکنش حذف‌شده — اصلاح فقط با ابطال ثبت‌شده</small></div>
-        <div><b><span data-count="100">۰</span>٪</b><small>تفکیک ودیعه از درآمد</small></div>
-        <div><b>۱ صفحه</b><small>برای تسویه‌ی کامل قرارداد</small></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= ONLINE BOOKING ================= -->
-  <section class="section section--tint" id="online">
-    <div class="container">
-      <header class="head reveal">
-        <span class="tag"><i data-i="globe"></i>مشتری تازه، مستقیم و بدون واسطه</span>
-        <h2>مسافر <span class="grad-text">QR را اسکن می‌کند</span>،<br>سفارش روی گوشی شما ظاهر می‌شود</h2>
-      </header>
-
-      <div class="online">
-        <ol class="steps reveal">
-          <li class="step is-active"><span class="step__n">۱</span><div><h3>اسکن QR</h3><p>مسافر با دوربین گوشی، بدون نصب برنامه، صفحه‌ی رزرو را باز می‌کند.</p></div></li>
-          <li class="step"><span class="step__n">۲</span><div><h3>انتخاب خودرو به زبان خودش</h3><p>فقط خودروهای آزاد در تاریخ سفرش را با قیمت می‌بیند؛ جست‌وجو، فیلتر و مقایسه.</p></div></li>
-          <li class="step"><span class="step__n">۳</span><div><h3>محل تحویل را می‌گوید</h3><p>فرودگاه، هتل، اسکله یا موقعیت روی نقشه — همراه با شماره‌ی پرواز.</p></div></li>
-          <li class="step"><span class="step__n">۴</span><div><h3>اعلان فوری برای شما</h3><p>سفارش همان لحظه با صدا روی موبایل یا کامپیوترتان ظاهر می‌شود؛ تماس و ثبت قرارداد با یک لمس.</p></div></li>
+        <ol class="moments" id="moments">
+          <li class="moment is-active" data-time="۰۷:۴۵" data-label="صبح، فرودگاه" data-sky="dawn">
+            <time>۰۷:۴۵</time>
+            <div>
+              <h3>پرواز <span class="code" dir="ltr">EK 975</span> نشست.</h3>
+              <p class="moment__then">سارا از روی QR تبلیغ هتل، یک کرولا را به زبان انگلیسی رزرو کرده و محل تحویل را فرودگاه زده است.</p>
+              <p class="moment__now"><i data-i="check"></i>سفارش همان لحظه با صدا روی گوشی شما آمده؛ با یک لمس تماس می‌گیرید و قرارداد ثبت می‌شود.</p>
+              <span class="chip">رزرو آنلاین ۴۰ زبانه</span>
+            </div>
+          </li>
+          <li class="moment" data-time="۰۹:۰۰" data-label="صبح، پارکینگ فرودگاه" data-sky="morning">
+            <time>۰۹:۰۰</time>
+            <div>
+              <h3>تحویل خودرو در فرودگاه.</h3>
+              <p class="moment__then">سوخت، کیلومتر، خط و خش‌ها؛ همه چیزهایی که روز برگشت سرشان بحث می‌شود.</p>
+              <p class="moment__now"><i data-i="check"></i>بازدید تحویل با عکس آسیب‌ها ثبت شد. ودیعه جدا از درآمد نگهداری می‌شود و قرارداد با شرایط مجموعه‌ی شما چاپ شد.</p>
+              <span class="chip">قرارداد و ودیعه</span>
+            </div>
+          </li>
+          <li class="moment" data-time="۱۱:۳۰" data-label="ظهر، دفتر" data-sky="noon">
+            <time>۱۱:۳۰</time>
+            <div>
+              <h3>مشتری دیروز زنگ زد: «دو روز تمدید.»</h3>
+              <p class="moment__then">اگر همان خودرو برای پس‌فردا به کس دیگری قول داده شده باشد چه؟</p>
+              <p class="moment__now"><i data-i="check"></i>سامانه رزروهای بعدی همان خودرو را بررسی کرد. تداخلی نبود و تمدید ثبت شد.</p>
+              <span class="chip">تقویم ناوگان</span>
+            </div>
+          </li>
+          <li class="moment" data-time="۱۴:۰۰" data-label="بعدازظهر" data-sky="afternoon">
+            <time>۱۴:۰۰</time>
+            <div>
+              <h3>سررسید چک امانت یک مشتری.</h3>
+              <p class="moment__then">چک‌ها لای دفتر و کشو؛ کدام عودت شده، کدام هنوز نزد ماست؟</p>
+              <p class="moment__now"><i data-i="check"></i>هشدار چک‌های نزد مجموعه آمد. وصول، عودت یا برگشت با یک کلیک.</p>
+              <span class="chip">مدیریت چک</span>
+            </div>
+          </li>
+          <li class="moment" data-time="۱۷:۳۰" data-label="غروب، اسکله" data-sky="sunset">
+            <time>۱۷:۳۰</time>
+            <div>
+              <h3>توسان برگشت؛ ۸۰ کیلومتر بیشتر از سقف.</h3>
+              <p class="moment__then">ماشین‌حساب، دفتر، و مشتری‌ای که پروازش تا دو ساعت دیگر است.</p>
+              <p class="moment__now"><i data-i="check"></i>هزینه‌ی کیلومتر اضافه خودکار حساب و از ودیعه کسر شد. باقی‌مانده با شماره‌ی پیگیری عودت شد.</p>
+              <span class="chip">تسویه در یک صفحه</span>
+            </div>
+          </li>
+          <li class="moment" data-time="۱۹:۱۵" data-label="شب" data-sky="evening">
+            <time>۱۹:۱۵</time>
+            <div>
+              <h3>خلافیِ قرارداد هفته‌ی پیش رسید.</h3>
+              <p class="moment__then">قرارداد بسته شده، ودیعه برگشته، مشتری رفته.</p>
+              <p class="moment__now"><i data-i="check"></i>جریمه به همان قرارداد اضافه شد و بدهی تا وصول کامل پیگیری می‌شود.</p>
+              <span class="chip">خلافی و بدهی معوق</span>
+            </div>
+          </li>
+          <li class="moment" data-time="۲۲:۰۰" data-label="شیفت شب" data-sky="night">
+            <time>۲۲:۰۰</time>
+            <div>
+              <h3>اپراتور شیفت شب وارد شد.</h3>
+              <p class="moment__then">چند نفر، چند شیفت، یک صندوق.</p>
+              <p class="moment__now"><i data-i="check"></i>او فقط بخش‌هایی را می‌بیند که اجازه دارد. هر تراکنش و هر ابطال با نام و زمان ثبت می‌شود؛ هیچ عددی بی‌صدا عوض نمی‌شود.</p>
+              <span class="chip">سطح دسترسی و سابقه</span>
+            </div>
+          </li>
+          <li class="moment" data-time="۰۳:۰۰" data-label="نیمه‌شب" data-sky="deep">
+            <time>۰۳:۰۰</time>
+            <div>
+              <h3>همه خواب‌اند.</h3>
+              <p class="moment__now"><i data-i="check"></i>نسخه‌ی پشتیبان خودکار گرفته شد؛ مثل هر شب.</p>
+              <span class="chip">پشتیبان روزانه</span>
+            </div>
+          </li>
         </ol>
+      </div>
+    </div>
+  </section>
 
-        <div class="online__phone reveal">
-          <div class="phone" id="langPhone">
-            <div class="phone__notch"></div>
-            <div class="phone__screen" id="langScreen" dir="ltr">
-              <div class="bk-head">
-                <span class="bk-live"><i></i><span data-t="avail"></span></span>
-                <b data-t="title"></b>
-                <div class="bk-search"><i data-i="search"></i><span data-t="search"></span></div>
-              </div>
-              <div class="bk-chips"><span class="on" data-t="all"></span><span>Toyota</span><span>Hyundai</span><span>Kia</span></div>
-              <div class="bk-list bk-list--static" id="langList"></div>
+  <!-- ============ FLEET ============ -->
+  <section class="fleet" id="fleet">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow eyebrow--plain">ناوگان و قرارداد</p>
+        <h2>یک خودرو، دو مشتری، یک روز؟ <span class="hl">دیگر نه.</span></h2>
+        <p>تقویم ناوگان همه‌ی خودروها را روزبه‌روز نشان می‌دهد. رزروی که با رزرو دیگری تداخل داشته باشد، ثبت نمی‌شود.</p>
+      </header>
+
+      <div class="gantt-wrap">
+        <div class="gantt" id="gantt" aria-label="نمونه‌ی تقویم ناوگان یک هفته">
+          <div class="gantt__head">
+            <span class="gantt__corner">خودرو / پلاک</span>
+            <div class="gantt__days"><span>شنبه</span><span>یکشنبه</span><span>دوشنبه</span><span>سه‌شنبه</span><span>چهارشنبه</span><span>پنجشنبه</span><span>جمعه</span></div>
+          </div>
+          <div class="gantt__body" id="ganttBody"></div>
+        </div>
+      </div>
+
+      <ul class="spec">
+        <li><i data-i="file"></i><div><h3>قرارداد سریع و چاپ</h3><p>ثبت قرارداد با ودیعه در یک صفحه و چاپ قرارداد رسمی با شرایط و مقررات اختصاصی مجموعه‌ی شما.</p></div></li>
+        <li><i data-i="clipboard"></i><div><h3>بازدید تحویل و برگشت</h3><p>سوخت، کیلومتر، وضعیت ظاهری و عکس آسیب‌ها؛ هنگام برگشت همه‌چیز قابل مقایسه است.</p></div></li>
+        <li><i data-i="gauge"></i><div><h3>سقف کیلومتر روزانه</h3><p>کیلومتر اضافه در تسویه خودکار محاسبه می‌شود.</p></div></li>
+        <li><i data-i="refresh"></i><div><h3>تمدید و ویرایش</h3><p>تمدید با بررسی خودکار رزروهای بعدی همان خودرو.</p></div></li>
+        <li><i data-i="bell"></i><div><h3>هشدارهای به‌موقع</h3><p>بیمه، معاینه‌ی فنی، سرویس روغن و لاستیک بر اساس کیلومتر، برگشت‌های امروز و دیرکرد.</p></div></li>
+        <li><i data-i="idcard"></i><div><h3>پرونده‌ی کامل مشتری</h3><p>گواهینامه، کارت ملی و گذرنامه، تاریخچه‌ی قراردادها و لیست سیاه مشتریان بدحساب.</p></div></li>
+        <li><i data-i="message"></i><div><h3>پیامک به مشتری</h3><p>خلاصه‌ی قرارداد و یادآوری روز قبل از برگشت (قابل فعال‌سازی).</p></div></li>
+        <li><i data-i="moon"></i><div><h3>حالت شب</h3><p>برای شیفت‌های شبانه؛ روی موبایل، تبلت و کامپیوتر.</p></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ MONEY: settlement simulator ============ -->
+  <section class="money" id="money">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow eyebrow--plain">مالی و حسابداری</p>
+        <h2>ودیعه امانت است، <span class="hl">نه درآمد.</span></h2>
+        <p>درآمد، ودیعه، بدهی، چک و هزینه هر کدام جای خودشان را دارند. خودتان امتحان کنید و یک قرارداد را تسویه کنید.</p>
+      </header>
+
+      <div class="sim">
+        <form class="sim__in" id="simForm" aria-label="شبیه‌ساز تسویه‌ی قرارداد">
+          <div class="field">
+            <label for="simCar">خودرو</label>
+            <select id="simCar">
+              <option value="4500000">تویوتا کمری ۲۰۲۲ — ۴٬۵۰۰٬۰۰۰ در روز</option>
+              <option value="5200000">هیوندای توسان — ۵٬۲۰۰٬۰۰۰ در روز</option>
+              <option value="3200000">هیوندای النترا — ۳٬۲۰۰٬۰۰۰ در روز</option>
+              <option value="2900000">کیا سراتو — ۲٬۹۰۰٬۰۰۰ در روز</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="simDays">مدت اجاره <output id="simDaysOut" for="simDays">۴ روز</output></label>
+            <input type="range" id="simDays" min="1" max="14" value="4">
+          </div>
+          <div class="field">
+            <label for="simKm">کیلومتر پیموده‌شده <output id="simKmOut" for="simKm">۸۸۰ کیلومتر</output></label>
+            <input type="range" id="simKm" min="0" max="2000" step="10" value="880">
+            <small id="simKmCap">سقف: ۸۰۰ کیلومتر (۲۰۰ در روز)</small>
+          </div>
+          <div class="field">
+            <label for="simLate">تأخیر در برگشت <output id="simLateOut" for="simLate">بدون تأخیر</output></label>
+            <input type="range" id="simLate" min="0" max="12" value="0">
+          </div>
+          <div class="field">
+            <label for="simFine">خلافی ثبت‌شده <output id="simFineOut" for="simFine">۴۵۰٬۰۰۰ تومان</output></label>
+            <input type="range" id="simFine" min="0" max="3000000" step="50000" value="450000">
+          </div>
+          <p class="sim__rules">نرخ‌ها نمونه‌اند و در سامانه برای هر مجموعه قابل تنظیم‌اند: ودیعه ۳۰ میلیون، کیلومتر اضافه ۲۰٬۰۰۰ تومان، هر ساعت تأخیر ۱۰٪ نرخ روزانه.</p>
+        </form>
+
+        <div class="receipt" aria-live="polite">
+          <div class="receipt__top">
+            <b>تسویه‌ی قرارداد</b>
+            <span class="code" dir="ltr">KFZ-1405-0318</span>
+          </div>
+          <dl class="receipt__lines">
+            <div class="paid"><dt>اجاره <small id="rDaysLbl">۴ روز</small></dt><dd><span id="rRent">۰</span><em>پرداخت در تحویل</em></dd></div>
+            <div><dt>کیلومتر اضافه <small id="rKmLbl">۸۰ کیلومتر</small></dt><dd id="rKm">۰</dd></div>
+            <div><dt>دیرکرد</dt><dd id="rLate">۰</dd></div>
+            <div><dt>خلافی</dt><dd id="rFine">۰</dd></div>
+          </dl>
+          <div class="jars">
+            <div class="jar jar--income">
+              <span>درآمد این قرارداد</span>
+              <b id="rIncome">۰</b>
+            </div>
+            <div class="jar jar--deposit">
+              <span>ودیعه‌ی امانی</span>
+              <b>۳۰٬۰۰۰٬۰۰۰</b>
+              <div class="jar__bar" role="img" id="rBar" aria-label=""><i id="rBarKept"></i><i id="rBarBack"></i></div>
+              <div class="jar__legend"><span class="k">کسر: <b id="rKept">۰</b></span><span class="b">عودت: <b id="rBack">۰</b></span></div>
             </div>
           </div>
-          <div class="toast toast--static" id="langToast">
-            <div class="toast__head"><span class="toast__dot"></span><b>درخواست رزرو آنلاین جدید</b></div>
-            <p><b dir="ltr">Sara M.</b> — تویوتا کرولا ۲۰۲۱ — ۳ روز</p>
-            <p class="toast__sub"><i data-i="pin"></i>فرودگاه بین‌المللی کیش · پرواز <span dir="ltr">EK 975</span></p>
-            <div class="toast__btns"><span class="tb tb--ok"><i data-i="phone"></i>تماس</span><span class="tb"><i data-i="file"></i>ثبت قرارداد</span></div>
+          <div class="receipt__total" id="rTotalRow">
+            <span id="rTotalLbl">عودت به مشتری</span>
+            <b id="rTotal">۰</b><small>تومان</small>
           </div>
+          <div class="stamp" id="stamp"><i data-i="checks"></i>تسویه شد</div>
         </div>
       </div>
 
-      <div class="langs reveal" role="group" aria-label="نمایش صفحه‌ی رزرو به زبان‌های مختلف">
-        <p class="langs__hint">روی یک زبان بزنید تا صفحه‌ی رزرو مسافر را به همان زبان ببینید:</p>
-        <div class="langs__chips" id="langChips"></div>
-      </div>
-
-      <ul class="ticks reveal">
-        <li><i data-i="check"></i>تشخیص خودکار زبان گوشی مسافر</li>
-        <li><i data-i="check"></i>نمایش فقط خودروهای واقعاً آزاد</li>
-        <li><i data-i="check"></i>کد پیگیری برای مسافر</li>
-        <li><i data-i="check"></i>اطلاعات داخلی شما هرگز نمایش داده نمی‌شود</li>
-        <li><i data-i="check"></i>عکس واقعی خودروهای شما</li>
-        <li><i data-i="check"></i>هر زمان بخواهید نمایش را خاموش کنید</li>
+      <ul class="spec spec--3">
+        <li><i data-i="safe"></i><div><h3>گزارش ویژه‌ی ودیعه</h3><p>برای اثبات اینکه امانت بوده و به مشتری برگشته؛ قابل ارائه به حسابدار و دارایی.</p></div></li>
+        <li><i data-i="wallet"></i><div><h3>صندوق‌ها و حساب‌ها</h3><p>چند صندوق و حساب بانکی، حتی ارزی (دلار، یورو، درهم)، با صورت‌حساب و موجودی لحظه‌ای.</p></div></li>
+        <li><i data-i="bank"></i><div><h3>مدیریت چک</h3><p>چک امانت و پرداختی؛ وصول، عودت و برگشت با یک کلیک.</p></div></li>
+        <li><i data-i="receipt"></i><div><h3>همه‌ی هزینه‌ها</h3><p>تعمیر، سوخت، بیمه، سرویس، لاستیک و هزینه‌های دفتر با دسته‌بندی دلخواه.</p></div></li>
+        <li><i data-i="chart"></i><div><h3>سود و زیان هر خودرو</h3><p>کدام خودرو پول می‌سازد و کدام هزینه؛ با پیشنهاد برای چینش بهتر ناوگان.</p></div></li>
+        <li><i data-i="hourglass"></i><div><h3>بدهی معوق</h3><p>بدهکاران به تفکیک سن بدهی ۳۰، ۶۰ و ۹۰ روز، با تماس مستقیم.</p></div></li>
       </ul>
     </div>
   </section>
 
-  <!-- ================= SECURITY ================= -->
-  <section class="section" id="security">
-    <div class="container">
-      <header class="head reveal">
-        <span class="tag"><i data-i="shield"></i>امنیت و آرامش خیال</span>
-        <h2>اطلاعات شما، <span class="grad-text">فقط مال شماست</span></h2>
-        <p>سامانه برای کار روزمره‌ی واقعی ساخته شده: چند کاربر، چند شیفت، و اطلاعاتی که نباید هیچ‌وقت گم شود.</p>
+  <!-- ============ GUESTS: multilingual booking ============ -->
+  <section class="guests" id="guests">
+    <div class="wrap guests__grid">
+      <div class="guests__word" aria-hidden="true">
+        <span class="bigword" id="bigWord">رزرو</span>
+        <span class="bigword__lang" id="bigLang">فارسی</span>
+      </div>
+      <div class="guests__text">
+        <p class="eyebrow eyebrow--plain">مشتری تازه، مستقیم و بدون واسطه</p>
+        <h2>مسافر QR را اسکن می‌کند، سفارش روی گوشی شما ظاهر می‌شود.</h2>
+        <p>صفحه‌ی رزرو شما به ۴۰ زبان است و خودش زبان گوشی مسافر را تشخیص می‌دهد. فقط خودروهای واقعاً آزاد با قیمتشان نمایش داده می‌شوند؛ اطلاعات داخلی دفتر هرگز. هر وقت بخواهید، نمایش را خاموش می‌کنید.</p>
+        <ol class="flow">
+          <li><b>اسکن QR</b><span>بدون نصب برنامه، با دوربین گوشی.</span></li>
+          <li><b>انتخاب خودرو به زبان خودش</b><span>جست‌وجو، فیلتر و مقایسه در تاریخ سفرش.</span></li>
+          <li><b>محل تحویل</b><span>فرودگاه، هتل، اسکله یا نقطه‌ای روی نقشه، همراه شماره‌ی پرواز.</span></li>
+          <li><b>اعلان فوری برای شما</b><span>با صدا؛ تماس و ثبت قرارداد با یک لمس. مسافر کد پیگیری می‌گیرد.</span></li>
+        </ol>
+        <p class="guests__langs">فارسی · English · العربية · Türkçe · Русский · 中文 · Deutsch · Français · Español · Italiano · Azərbaycan · اردو · हिन्दी · 日本語 <b>و ۲۶ زبان دیگر</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST ============ -->
+  <section class="trust" id="trust">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow eyebrow--plain">امنیت و آرامش خیال</p>
+        <h2>اطلاعات شما، فقط مال شماست.</h2>
       </header>
-      <div class="secure">
-        <div class="sec reveal"><i data-i="building"></i><h3>داده‌های جدا</h3><p>هر مجموعه فقط اطلاعات خودش را می‌بیند.</p></div>
-        <div class="sec reveal"><i data-i="usercog"></i><h3>سطح دسترسی</h3><p>مدیر، مدیر دفتر، حسابدار و اپراتور؛ هر کس به اندازه‌ی کارش.</p></div>
-        <div class="sec reveal"><i data-i="history"></i><h3>سابقه‌ی تغییرات</h3><p>چه کسی، چه زمانی، چه چیزی را تغییر داد.</p></div>
-        <div class="sec reveal"><i data-i="cloudup"></i><h3>پشتیبان روزانه</h3><p>نسخه‌ی پشتیبان خودکار، هر روز.</p></div>
-        <div class="sec reveal"><i data-i="key"></i><h3>ورود امن</h3><p>قفل خودکار حساب در برابر حدس رمز.</p></div>
-        <div class="sec reveal"><i data-i="undo"></i><h3>بدون پاک‌شدن</h3><p>اشتباه‌ها با ابطال اصلاح می‌شوند، نه حذف.</p></div>
-      </div>
-      <ul class="devices reveal">
-        <li><i data-i="smartphone"></i>موبایل</li>
-        <li><i data-i="tablet"></i>تبلت</li>
-        <li><i data-i="laptop"></i>کامپیوتر</li>
-        <li><i data-i="browser"></i>بدون نصب، فقط مرورگر</li>
+      <ul class="trust__list">
+        <li><i data-i="building"></i><b>داده‌های جدا</b><span>هر مجموعه فقط اطلاعات خودش را می‌بیند.</span></li>
+        <li><i data-i="usercog"></i><b>سطح دسترسی</b><span>مدیر، مدیر دفتر، حسابدار و اپراتور؛ هر کس به اندازه‌ی کارش.</span></li>
+        <li><i data-i="history"></i><b>سابقه‌ی تغییرات</b><span>چه کسی، چه زمانی، چه چیزی را تغییر داد.</span></li>
+        <li><i data-i="undo"></i><b>بدون پاک‌شدن</b><span>اشتباه با ابطال اصلاح می‌شود، نه حذف.</span></li>
+        <li><i data-i="key"></i><b>ورود امن</b><span>قفل خودکار حساب در برابر حدس رمز.</span></li>
+        <li><i data-i="cloudup"></i><b>پشتیبان روزانه</b><span>نسخه‌ی پشتیبان خودکار، هر روز.</span></li>
       </ul>
     </div>
   </section>
 
-  <!-- ================= CTA ================= -->
-  <section class="section section--cta" id="contact">
-    <div class="container">
-      <div class="cta reveal">
-        <div class="cta__text">
-          <h2>کیش را با ناوگانی منظم‌تر<br>و مشتری بیشتر بچرخانید</h2>
-          <p>برای آشنایی بیشتر و دیدن سامانه از نزدیک وارد شوید یا QR را اسکن کنید.</p>
-          <div class="cta__btns">
-            <a href="https://app.kfzocar.ir" class="btn btn--light btn--lg">ورود به app.kfzocar.ir <i data-i="arrow"></i></a>
+  <!-- ============ CTA ============ -->
+  <section class="end" id="contact">
+    <div class="wrap">
+      <div class="end__in">
+        <div class="end__text">
+          <h2>کیش را با ناوگانی منظم‌تر و مشتری بیشتر بچرخانید.</h2>
+          <p>برای دیدن سامانه از نزدیک وارد شوید، یا QR را با گوشی اسکن کنید.</p>
+          <div class="end__cta">
+            <a href="https://app.kfzocar.ir" class="btn btn--brand btn--lg">ورود به سامانه <i data-i="arrow"></i></a>
+            <span class="end__url" dir="ltr">app.kfzocar.ir</span>
           </div>
+          <ul class="devices">
+            <li><i data-i="smartphone"></i>موبایل</li>
+            <li><i data-i="tablet"></i>تبلت</li>
+            <li><i data-i="laptop"></i>کامپیوتر</li>
+            <li><i data-i="browser"></i>بدون نصب، فقط مرورگر</li>
+          </ul>
         </div>
-        <a class="cta__qr" href="https://kfzocar.ir" aria-label="QR سایت kfzocar.ir">
-          <img src="assets/qr.svg" alt="QR کد kfzocar.ir" width="170" height="170">
-          <span>اسکن کنید</span>
+        <a class="qr" href="https://kfzocar.ir" aria-label="QR سایت kfzocar.ir">
+          <span class="qr__frame"><img src="assets/qr.svg" alt="QR کد kfzocar.ir" width="160" height="160"><i class="qr__laser"></i></span>
+          <span class="qr__cap" dir="ltr">kfzocar.ir</span>
         </a>
       </div>
     </div>
@@ -325,20 +356,11 @@
 
 </main>
 
-<footer class="footer">
-  <div class="container footer__inner">
-    <div>
-      <a href="#top" class="logo logo--dark"><span class="logo__mark"><i data-i="car"></i></span><span class="logo__text">kfzo<b>car</b></span></a>
-      <p>سامانه‌ی مدیریت اجاره خودرو</p>
-    </div>
-    <nav aria-label="پاورقی">
-      <a href="#why">چرا kfzocar</a>
-      <a href="#fleet">ناوگان و قرارداد</a>
-      <a href="#finance">مالی و حسابداری</a>
-      <a href="#online">رزرو آنلاین</a>
-      <a href="https://app.kfzocar.ir">ورود به سامانه</a>
-    </nav>
-    <small>© <span id="year"></span> kfzocar.ir · قیمت‌های داخل تصاویر نمونه هستند.</small>
+<footer class="foot">
+  <div class="wrap foot__in">
+    <a href="#top" class="logo"><span class="logo__mark"><i data-i="car"></i></span><span class="logo__word">kfzo<b>car</b></span></a>
+    <span>سامانه‌ی مدیریت اجاره خودرو · کیش</span>
+    <small>© <span id="year">۲۰۲۶</span> kfzocar.ir · نام‌ها، پروازها و قیمت‌های این صفحه نمونه هستند.</small>
   </div>
 </footer>
 
