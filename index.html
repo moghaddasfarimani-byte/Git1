@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -223,44 +224,37 @@
       <header class="sec-head">
         <p class="eyebrow eyebrow--plain">جدید · موقعیت مکانی</p>
         <h2>هر خودرو الان کجای کیش است؟ <span class="hl">روی نقشه ببینید.</span></h2>
-        <p>موقعیت زنده‌ی خودروهای ناوگان روی نقشه نمایش داده می‌شود: کدام در حرکت است، کدام جایی پارک شده و کدام در دفتر منتظر مشتری بعدی است.</p>
+        <p>موقعیت زنده‌ی خودروهای ناوگان روی نقشه‌ی کیش نمایش داده می‌شود: کدام در حرکت است، کدام متوقف است و کدام سیگنال نمی‌دهد. با جست‌وجوی پلاک یا نام مشتری، خودرو را روی نقشه پیدا کنید.</p>
       </header>
 
-      <div class="livemap">
-        <div class="livemap__map">
-          <svg viewBox="0 0 800 460" width="800" height="460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="نمونه‌ی نقشه‌ی جزیره‌ی کیش با موقعیت خودروها" id="mapSvg">
-            <rect x="0" y="0" width="800" height="460" class="map-sea" fill="#10365e"/>
-            <path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M30,40 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M620,30 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M40,420 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M640,430 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M20,200 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M740,260 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M250,445 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M300,25 q12,-8 24,0 t24,0 t24,0"/>
-            <path class="map-shore" fill="#3fbfb2" fill-opacity=".55" d="M80,250 C85,165 185,100 330,85 C475,70 650,88 725,158 C782,210 770,298 706,340 C624,394 470,405 330,395 C195,386 75,345 80,250 Z"/>
-            <path class="map-land" fill="#2a2658" stroke="#3fbfb2" stroke-width="2" d="M90,250 C95,170 190,110 330,95 C470,80 640,95 715,160 C770,205 760,290 700,330 C620,385 470,395 330,385 C200,376 85,340 90,250 Z"/>
-            <path class="map-road" id="ringRoad" fill="none" stroke="#4a4386" stroke-width="7" d="M140,250 C145,190 220,145 335,135 C465,122 610,135 670,185 C712,220 705,280 660,305 C590,345 465,352 335,345 C220,338 137,310 140,250 Z"/>
-            <path class="map-road map-road--minor" fill="none" stroke="#4a4386" stroke-width="4" d="M335,135 C350,200 330,280 335,345"/>
-            <path class="map-road map-road--minor" fill="none" stroke="#4a4386" stroke-width="4" d="M520,128 C505,200 515,280 520,350"/>
-            <g class="map-airport" transform="rotate(-6 440 215)">
-              <rect x="370" y="208" width="150" height="14" rx="3"/>
-              <path d="M380 215 H510" class="map-runway-line"/>
-            </g>
-            <g class="map-pier"><path d="M705,170 L745,150 M712,182 L752,166"/></g>
-            <g class="map-hotels"><rect x="440" y="356" width="14" height="10" rx="2"/><rect x="462" y="360" width="14" height="10" rx="2"/><rect x="484" y="358" width="14" height="10" rx="2"/><rect x="506" y="355" width="14" height="10" rx="2"/></g>
-            <g class="map-office"><circle cx="300" cy="245" r="13"/><path d="M300 238 v14 M293 245 h14"/></g>
-            <text x="445" y="194" class="map-label">فرودگاه</text>
-            <text x="728" y="135" class="map-label">اسکله</text>
-            <text x="480" y="392" class="map-label">هتل‌ها</text>
-            <text x="300" y="282" class="map-label">دفتر شما</text>
-            <g id="carLayer"></g>
-          </svg>
-          <div class="livemap__pop" id="mapPop" aria-live="polite">
-            <b id="popCar">تویوتا کمری</b>
-            <span class="plate"><span id="popPlate">۲۱۴۷۸</span><em>کیش</em></span>
-            <span class="livemap__state" id="popState">در حال حرکت</span>
-            <small id="popWho">قرارداد: Olga P. · به‌روزرسانی: همین حالا</small>
-          </div>
-          <span class="livemap__badge"><i></i>زنده</span>
+      <div class="appwin" aria-label="نمونه‌ی صفحه‌ی نقشه‌ی زنده در سامانه">
+        <div class="appwin__bar">
+          <span class="appwin__dots"><i></i><i></i><i></i></span>
+          <span class="appwin__url" dir="ltr">app.kfzocar.ir/Vehicles/Map</span>
         </div>
-
-        <ul class="livemap__list" id="carList" aria-label="خودروهای ناوگان"></ul>
+        <div class="appwin__head">
+          <div><b>نقشه‌ی زنده‌ی ناوگان</b><small id="mapDate">امروز</small></div>
+          <span class="appwin__live"><i></i>زنده</span>
+        </div>
+        <div class="livemap">
+          <div class="livemap__map">
+            <div id="leafletMap" class="livemap__leaflet" role="img" aria-label="نقشه‌ی جزیره‌ی کیش با موقعیت نمونه‌ی خودروها"></div>
+          </div>
+          <div class="livemap__side">
+            <label class="livemap__search" for="carSearch">
+              <i data-i="search"></i>
+              <input id="carSearch" type="search" placeholder="جست‌وجوی خودرو، پلاک یا مشتری…" autocomplete="off">
+            </label>
+            <div class="livemap__legend">
+              <span><i class="dot is-moving"></i>در حال حرکت</span>
+              <span><i class="dot is-parked"></i>متوقف</span>
+              <span><i class="dot is-nosignal"></i>بدون سیگنال</span>
+            </div>
+            <ul class="livemap__list" id="carList" aria-label="خودروهای ناوگان"></ul>
+          </div>
+        </div>
       </div>
-      <p class="livemap__note">نقشه و خودروها نمونه هستند. در سامانه، موقعیت خودروهای خود شما روی نقشه‌ی واقعی نمایش داده می‌شود.</p>
+      <p class="livemap__note">خودروها و موقعیت‌ها نمونه هستند. در سامانه، هر خودرویی که ردیاب آن از صفحه‌ی خودرو راه‌اندازی شده باشد، با موقعیت واقعی روی همین نقشه دیده می‌شود.</p>
     </div>
   </section>
 
@@ -430,6 +424,7 @@
 
 <a href="https://wa.me/989121029560?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D8%AF%D9%85%D9%88%DB%8C%20kfzocar%20%D8%AF%D8%A7%D8%B1%D9%85" class="wa-fab" target="_blank" rel="noopener" aria-label="درخواست دمو در واتساپ"><i data-i="whatsapp"></i><span>درخواست دمو</span></a>
 
+<script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/main.js"></script>
 </body>
 </html>

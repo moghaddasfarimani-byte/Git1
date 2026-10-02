@@ -44,6 +44,7 @@
     laptop: '<path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.3 2.6a1 1 0 0 1-.9 1.4H3.6a1 1 0 0 1-.9-1.4L4 16"/>',
     whatsapp: '<path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9.2 8.4c.2-.5.9-.6 1.2-.2l.8 1.2c.2.3.1.7-.1.9l-.5.5c.5 1.1 1.4 2 2.5 2.5l.5-.5c.3-.2.7-.3.9-.1l1.2.8c.4.3.3 1-.2 1.2-.7.3-1.5.4-2.3.1a7.5 7.5 0 0 1-4.1-4.1c-.3-.8-.2-1.6.1-2.3z" fill="currentColor" stroke="none"/>',
     copy: '<rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
+    search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
     browser: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M21.2 8H12M3.9 6.1 8.5 14M10.9 21.9 15.5 14"/>',
   };
   $$("i[data-i]").forEach((el) => {
@@ -272,77 +273,87 @@
   links.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
   addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
-  /* ---------------- live map: vehicle locations ---------------- */
-  const mapSvg = $("#mapSvg");
-  if (mapSvg) {
-    const NS = "http://www.w3.org/2000/svg";
-    const road = $("#ringRoad");
-    const L = road.getTotalLength();
-    const STATE = { moving: "در حال حرکت", parked: "متوقف", office: "در دفتر · آزاد" };
+  /* ---------------- live map: real Kish map (Leaflet + OpenStreetMap) ---------------- */
+  const mapEl = $("#leafletMap");
+  if (mapEl && window.L) {
+    try { $("#mapDate").textContent = new Date().toLocaleDateString("fa-IR", { weekday: "long", year: "numeric", month: "2-digit", day: "2-digit" }); } catch (e) { /* keep "امروز" */ }
+    const STATE = { moving: "در حال حرکت", parked: "متوقف", nosignal: "بدون سیگنال" };
+    // Sample fleet. Moving cars shuttle between a few points on the island.
     const CARS = [
-      { car: "تویوتا کمری", plate: "۲۱۴۷۸", st: "moving", who: "قرارداد: Olga P.", at: 0.05, speed: 0.018 },
-      { car: "هیوندای توسان", plate: "۳۰۵۱۲", st: "moving", who: "قرارداد: Mert Y.", at: 0.42, speed: 0.013 },
-      { car: "هیوندای النترا", plate: "۴۴۲۰۷", st: "moving", who: "قرارداد: مهدی ر.", at: 0.7, speed: -0.015 },
-      { car: "کیا سراتو", plate: "۱۸۹۴۰", st: "parked", who: "قرارداد: Ayşe K. · نزدیک هتل‌ها", xy: [470, 344] },
-      { car: "تویوتا کمری", plate: "۵۲۳۶۱", st: "office", who: "آماده‌ی تحویل بعدی", xy: [322, 232] },
+      { car: "تویوتا کمری", plate: "۲۱۴۷۸", who: "Olga P.", st: "moving", path: [[26.5545, 53.955], [26.5560, 53.970], [26.5555, 53.985], [26.5530, 54.000]], t: 0, v: 0.05 },
+      { car: "هیوندای توسان", plate: "۳۰۵۱۲", who: "Mert Y.", st: "moving", path: [[26.5300, 53.996], [26.5225, 54.005], [26.5150, 54.000]], t: 0.4, v: 0.07 },
+      { car: "هیوندای النترا", plate: "۴۴۲۰۷", who: "مهدی ر.", st: "moving", path: [[26.5160, 53.955], [26.5150, 53.970], [26.5160, 53.985]], t: 0.8, v: 0.06 },
+      { car: "کیا سراتو", plate: "۱۸۹۴۰", who: "Ayşe K.", st: "parked", path: [[26.5330, 54.022]] },
+      { car: "تویوتا کمری", plate: "۵۲۳۶۱", who: "—", st: "parked", path: [[26.5480, 54.008]] },
+      { car: "کیا اسپورتیج", plate: "۶۱۲۳۴", who: "Leyla H.", st: "nosignal", path: [[26.5300, 53.932]] },
     ];
-    const layer = $("#carLayer");
-    CARS.forEach((c, i) => {
-      const g = document.createElementNS(NS, "g");
-      g.setAttribute("class", `map-car map-car--${c.st}`);
-      const big = matchMedia("(max-width: 560px)").matches; // the map is drawn small on phones
-      g.innerHTML = `<circle class="map-car__ring" r="${big ? 26 : 16}"/><circle class="map-car__dot" r="${big ? 14 : 8}"/><text class="map-car__tag" y="${big ? -26 : -18}">${c.car} ${c.plate}</text>`;
-      g.addEventListener("click", () => { pick(i, true); });
-      layer.appendChild(g);
-      c.el = g;
-    });
-    const placeCar = (c) => {
-      let x, y;
-      if (c.xy) [x, y] = c.xy;
-      else { const pt = road.getPointAtLength((((c.at % 1) + 1) % 1) * L); x = pt.x; y = pt.y; }
-      c.el.setAttribute("transform", `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
+    const lerp = (p, q, f) => [p[0] + (q[0] - p[0]) * f, p[1] + (q[1] - p[1]) * f];
+    const posOf = (c) => {
+      if (c.path.length === 1) return c.path[0];
+      const n = c.path.length - 1, u = (c.t % 2 + 2) % 2, x = (u <= 1 ? u : 2 - u) * n; // ping-pong along the path
+      const i = Math.min(Math.floor(x), n - 1);
+      return lerp(c.path[i], c.path[i + 1], x - i);
     };
-    CARS.forEach(placeCar);
+
+    const map = L.map(mapEl, {
+      center: [26.535, 53.975], zoom: 13, minZoom: 11, maxZoom: 18,
+      scrollWheelZoom: false, dragging: !L.Browser.mobile, tap: false, zoomControl: true,
+    });
+    let tiles = 0;
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).on("tileload", () => { tiles++; }).addTo(map);
+    // Some embedded previews block map images; say so instead of showing an empty blue box.
+    setTimeout(() => {
+      if (tiles === 0) {
+        const note = document.createElement("div");
+        note.className = "livemap__offline";
+        note.textContent = "نقشه در این پیش‌نمایش بارگذاری نشد؛ روی سایت kfzocar.ir نمایش داده می‌شود.";
+        mapEl.appendChild(note);
+      }
+    }, 6000);
+
+    const icon = (st, sel) => L.divIcon({ className: "", html: `<span class="carpin carpin--${st}${sel ? " is-sel" : ""}"><i></i></span>`, iconSize: [18, 18], iconAnchor: [9, 9] });
+    const popup = (c) => `<b>${c.car}</b> · پلاک ${c.plate} کیش<br>${STATE[c.st]}${c.who !== "—" ? ` · قرارداد: <span dir="auto">${c.who}</span>` : " · آزاد"}<br><small>${c.st === "nosignal" ? "آخرین موقعیت: ۴۰ دقیقه پیش" : "به‌روزرسانی: همین حالا"}</small>`;
+    CARS.forEach((c, i) => {
+      c.m = L.marker(posOf(c), { icon: icon(c.st, false), keyboard: false }).addTo(map)
+        .bindTooltip(`${c.car} ${c.plate}`, { className: "cartip", direction: "top", offset: [0, -10] })
+        .bindPopup(popup(c), { closeButton: false });
+      c.m.on("click", () => pick(i, false));
+    });
 
     const list = $("#carList");
-    list.innerHTML = CARS.map((c, i) => `<li><button type="button" data-i="${i}" aria-pressed="false">
-      <span class="dot is-${c.st}"></span>
-      <span><b>${c.car} <span class="plate"><span>${c.plate}</span><em>کیش</em></span></b><small>${STATE[c.st]}</small></span>
-    </button></li>`).join("");
-
-    let sel = -1, auto = true, cycle = null;
-    function pick(i, byUser) {
-      if (byUser) { auto = false; clearInterval(cycle); }
+    const renderList = (q = "") => {
+      const k = q.trim();
+      const shown = CARS.map((c, i) => [c, i]).filter(([c]) => !k || `${c.car} ${c.plate} ${c.who}`.toLowerCase().includes(k.toLowerCase()));
+      list.innerHTML = shown.length ? shown.map(([c, i]) => `<li><button type="button" data-i="${i}" aria-pressed="${i === sel}">
+          <span class="dot is-${c.st}"></span>
+          <span><b>${c.car}<span class="plate"><span>${c.plate}</span><em>کیش</em></span></b><small>${STATE[c.st]}${c.who !== "—" ? ` · <span dir="auto">${c.who}</span>` : ""}</small></span>
+        </button></li>`).join("") : `<li class="livemap__empty">خودرویی با این مشخصات پیدا نشد.</li>`;
+      CARS.forEach((c, i) => c.m.setOpacity(shown.some(([, j]) => j === i) ? 1 : 0.25));
+    };
+    let sel = -1;
+    function pick(i, pan) {
+      if (sel >= 0) CARS[sel].m.setIcon(icon(CARS[sel].st, false));
       sel = i;
       const c = CARS[i];
-      CARS.forEach((x, j) => x.el.classList.toggle("is-sel", j === i));
+      c.m.setIcon(icon(c.st, true)).openPopup();
+      if (pan) map.panTo(c.m.getLatLng(), { animate: !reduce });
       $$("button", list).forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.i === i)));
-      $("#popCar").textContent = c.car;
-      $("#popPlate").textContent = c.plate;
-      const st = $("#popState");
-      st.textContent = STATE[c.st];
-      st.className = `livemap__state is-${c.st}`;
-      $("#popWho").textContent = `${c.who} · به‌روزرسانی: همین حالا`;
-      layer.appendChild(c.el); // draw the selected car on top
     }
     list.addEventListener("click", (e) => { const b = e.target.closest("button[data-i]"); if (b) pick(+b.dataset.i, true); });
-    pick(0, false);
+    $("#carSearch").addEventListener("input", (e) => renderList(e.target.value));
+    renderList();
 
     if (!reduce) {
       let raf = null, last = 0;
       const frame = (t) => {
-        const dt = last ? Math.min((t - last) / 1000, 0.05) : 0;
+        const dt = last ? Math.min((t - last) / 1000, 0.1) : 0;
         last = t;
-        CARS.forEach((c) => { if (c.speed) { c.at += c.speed * dt; placeCar(c); } });
+        CARS.forEach((c) => { if (c.st === "moving") { c.t += c.v * dt; c.m.setLatLng(posOf(c)); } });
         raf = requestAnimationFrame(frame);
       };
-      inView(mapSvg, (v) => {
-        cancelAnimationFrame(raf); last = 0; clearInterval(cycle);
-        if (v) {
-          raf = requestAnimationFrame(frame);
-          if (auto) cycle = setInterval(() => pick((sel + 1) % CARS.length, false), 3800);
-        }
-      }, { threshold: 0.2 });
+      inView(mapEl, (v) => { cancelAnimationFrame(raf); last = 0; if (v) { map.invalidateSize(); raf = requestAnimationFrame(frame); } }, { threshold: 0.1 });
     }
   }
 
