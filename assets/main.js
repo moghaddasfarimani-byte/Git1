@@ -274,7 +274,7 @@
   addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
   /* ---------------- live map: Kish map image with car markers ----------------
-     Positions are pixels on assets/kish-map.webp (890×520), placed on its roads. */
+     Positions are pixels on assets/kish-map.jpg (890×520), placed on its roads. */
   const canvas = $("#mapCanvas");
   if (canvas) {
     try { $("#mapDate").textContent = new Date().toLocaleDateString("fa-IR", { weekday: "long", year: "numeric", month: "2-digit", day: "2-digit" }); } catch (e) { /* keep "امروز" */ }
