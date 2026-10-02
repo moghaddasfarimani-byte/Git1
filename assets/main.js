@@ -273,87 +273,92 @@
   links.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
   addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
-  /* ---------------- live map: real Kish map (Leaflet + OpenStreetMap) ---------------- */
-  const mapEl = $("#leafletMap");
-  if (mapEl && window.L) {
+  /* ---------------- live map: Kish map image with car markers ----------------
+     Positions are pixels on assets/kish-map.webp (890×520), placed on its roads. */
+  const canvas = $("#mapCanvas");
+  if (canvas) {
     try { $("#mapDate").textContent = new Date().toLocaleDateString("fa-IR", { weekday: "long", year: "numeric", month: "2-digit", day: "2-digit" }); } catch (e) { /* keep "امروز" */ }
+    const W = 890, H = 520;
     const STATE = { moving: "در حال حرکت", parked: "متوقف", nosignal: "بدون سیگنال" };
-    // Sample fleet. Moving cars shuttle between a few points on the island.
+    const RING = [[280, 140], [360, 150], [430, 170], [480, 195], [530, 232], [578, 275], [597, 312], [590, 350], [560, 376], [500, 390], [445, 395], [380, 370], [320, 345], [262, 310], [232, 256], [226, 200], [250, 160], [280, 140]];
     const CARS = [
-      { car: "تویوتا کمری", plate: "۲۱۴۷۸", who: "Olga P.", st: "moving", path: [[26.5545, 53.955], [26.5560, 53.970], [26.5555, 53.985], [26.5530, 54.000]], t: 0, v: 0.05 },
-      { car: "هیوندای توسان", plate: "۳۰۵۱۲", who: "Mert Y.", st: "moving", path: [[26.5300, 53.996], [26.5225, 54.005], [26.5150, 54.000]], t: 0.4, v: 0.07 },
-      { car: "هیوندای النترا", plate: "۴۴۲۰۷", who: "مهدی ر.", st: "moving", path: [[26.5160, 53.955], [26.5150, 53.970], [26.5160, 53.985]], t: 0.8, v: 0.06 },
-      { car: "کیا سراتو", plate: "۱۸۹۴۰", who: "Ayşe K.", st: "parked", path: [[26.5330, 54.022]] },
-      { car: "تویوتا کمری", plate: "۵۲۳۶۱", who: "—", st: "parked", path: [[26.5480, 54.008]] },
-      { car: "کیا اسپورتیج", plate: "۶۱۲۳۴", who: "Leyla H.", st: "nosignal", path: [[26.5300, 53.932]] },
+      { car: "تویوتا کمری", plate: "۲۱۴۷۸", who: "Olga P.", st: "moving", path: RING, loop: true, t: 0, v: 0.012 },
+      { car: "هیوندای توسان", plate: "۳۰۵۱۲", who: "Mert Y.", st: "moving", path: [[152, 133], [222, 96], [300, 78], [362, 100], [470, 128], [560, 130], [612, 136]], t: 0.3, v: 0.03 },
+      { car: "هیوندای النترا", plate: "۴۴۲۰۷", who: "مهدی ر.", st: "moving", path: RING, loop: true, t: 0.55, v: -0.01 },
+      { car: "کیا سراتو", plate: "۱۸۹۴۰", who: "Ayşe K.", st: "parked", path: [[602, 214]] },
+      { car: "تویوتا کمری", plate: "۵۲۳۶۱", who: "—", st: "parked", path: [[556, 228]] },
+      { car: "کیا اسپورتیج", plate: "۶۱۲۳۴", who: "Leyla H.", st: "nosignal", path: [[150, 245]] },
     ];
-    const lerp = (p, q, f) => [p[0] + (q[0] - p[0]) * f, p[1] + (q[1] - p[1]) * f];
+    const segLens = (pts) => pts.slice(1).map((p, i) => Math.hypot(p[0] - pts[i][0], p[1] - pts[i][1]));
+    CARS.forEach((c) => { c.lens = segLens(c.path); c.total = c.lens.reduce((x, y) => x + y, 0); });
     const posOf = (c) => {
       if (c.path.length === 1) return c.path[0];
-      const n = c.path.length - 1, u = (c.t % 2 + 2) % 2, x = (u <= 1 ? u : 2 - u) * n; // ping-pong along the path
-      const i = Math.min(Math.floor(x), n - 1);
-      return lerp(c.path[i], c.path[i + 1], x - i);
-    };
-
-    const map = L.map(mapEl, {
-      center: [26.535, 53.975], zoom: 13, minZoom: 11, maxZoom: 18,
-      scrollWheelZoom: false, dragging: !L.Browser.mobile, tap: false, zoomControl: true,
-    });
-    let tiles = 0;
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    }).on("tileload", () => { tiles++; }).addTo(map);
-    // Some embedded previews block map images; say so instead of showing an empty blue box.
-    setTimeout(() => {
-      if (tiles === 0) {
-        const note = document.createElement("div");
-        note.className = "livemap__offline";
-        note.textContent = "نقشه در این پیش‌نمایش بارگذاری نشد؛ روی سایت kfzocar.ir نمایش داده می‌شود.";
-        mapEl.appendChild(note);
+      let u = c.loop ? ((c.t % 1) + 1) % 1 : (() => { const k = ((c.t % 2) + 2) % 2; return k <= 1 ? k : 2 - k; })();
+      let d = u * c.total;
+      for (let i = 0; i < c.lens.length; i++) {
+        if (d <= c.lens[i] || i === c.lens.length - 1) {
+          const f = c.lens[i] ? Math.min(d / c.lens[i], 1) : 0, p = c.path[i], q = c.path[i + 1];
+          return [p[0] + (q[0] - p[0]) * f, p[1] + (q[1] - p[1]) * f];
+        }
+        d -= c.lens[i];
       }
-    }, 6000);
-
-    const icon = (st, sel) => L.divIcon({ className: "", html: `<span class="carpin carpin--${st}${sel ? " is-sel" : ""}"><i></i></span>`, iconSize: [18, 18], iconAnchor: [9, 9] });
-    const popup = (c) => `<b>${c.car}</b> · پلاک ${c.plate} کیش<br>${STATE[c.st]}${c.who !== "—" ? ` · قرارداد: <span dir="auto">${c.who}</span>` : " · آزاد"}<br><small>${c.st === "nosignal" ? "آخرین موقعیت: ۴۰ دقیقه پیش" : "به‌روزرسانی: همین حالا"}</small>`;
+      return c.path[0];
+    };
+    const layer = $("#carLayer"), pop = $("#mapPop");
+    const place = (el, [x, y]) => { el.style.left = `${(x / W) * 100}%`; el.style.top = `${(y / H) * 100}%`; };
     CARS.forEach((c, i) => {
-      c.m = L.marker(posOf(c), { icon: icon(c.st, false), keyboard: false }).addTo(map)
-        .bindTooltip(`${c.car} ${c.plate}`, { className: "cartip", direction: "top", offset: [0, -10] })
-        .bindPopup(popup(c), { closeButton: false });
-      c.m.on("click", () => pick(i, false));
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "carpin-btn";
+      b.setAttribute("aria-label", `${c.car} ${c.plate}، ${STATE[c.st]}`);
+      b.innerHTML = `<span class="carpin carpin--${c.st}"><i></i></span>`;
+      b.addEventListener("click", () => pick(i));
+      layer.appendChild(b);
+      c.el = b; place(b, posOf(c));
     });
+
+    let sel = -1;
+    const popHTML = (c) => `<b>${c.car}</b> · پلاک ${c.plate} کیش<br>${STATE[c.st]}${c.who !== "—" ? ` · قرارداد: <span dir="auto">${c.who}</span>` : " · آزاد"}<br><small>${c.st === "nosignal" ? "آخرین موقعیت: ۴۰ دقیقه پیش" : "به‌روزرسانی: همین حالا"}</small>`;
+    const syncPop = () => {
+      if (sel < 0) return;
+      const xy = posOf(CARS[sel]);
+      // Flip below the car when there is no room above it inside the map.
+      pop.classList.toggle("is-below", (xy[1] / H) * canvas.clientHeight < pop.offsetHeight + 24);
+      place(pop, xy);
+    };
+    function pick(i) {
+      if (sel >= 0) $(".carpin", CARS[sel].el).classList.remove("is-sel");
+      sel = i;
+      const c = CARS[i];
+      $(".carpin", c.el).classList.add("is-sel");
+      pop.innerHTML = popHTML(c); pop.hidden = false; syncPop();
+      $$("button", list).forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.i === i)));
+    }
 
     const list = $("#carList");
     const renderList = (q = "") => {
-      const k = q.trim();
-      const shown = CARS.map((c, i) => [c, i]).filter(([c]) => !k || `${c.car} ${c.plate} ${c.who}`.toLowerCase().includes(k.toLowerCase()));
+      const k = q.trim().toLowerCase();
+      const shown = CARS.map((c, i) => [c, i]).filter(([c]) => !k || `${c.car} ${c.plate} ${c.who}`.toLowerCase().includes(k));
       list.innerHTML = shown.length ? shown.map(([c, i]) => `<li><button type="button" data-i="${i}" aria-pressed="${i === sel}">
           <span class="dot is-${c.st}"></span>
           <span><b>${c.car}<span class="plate"><span>${c.plate}</span><em>کیش</em></span></b><small>${STATE[c.st]}${c.who !== "—" ? ` · <span dir="auto">${c.who}</span>` : ""}</small></span>
         </button></li>`).join("") : `<li class="livemap__empty">خودرویی با این مشخصات پیدا نشد.</li>`;
-      CARS.forEach((c, i) => c.m.setOpacity(shown.some(([, j]) => j === i) ? 1 : 0.25));
+      CARS.forEach((c, i) => { c.el.style.opacity = shown.some(([, j]) => j === i) ? 1 : 0.25; });
     };
-    let sel = -1;
-    function pick(i, pan) {
-      if (sel >= 0) CARS[sel].m.setIcon(icon(CARS[sel].st, false));
-      sel = i;
-      const c = CARS[i];
-      c.m.setIcon(icon(c.st, true)).openPopup();
-      if (pan) map.panTo(c.m.getLatLng(), { animate: !reduce });
-      $$("button", list).forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.i === i)));
-    }
-    list.addEventListener("click", (e) => { const b = e.target.closest("button[data-i]"); if (b) pick(+b.dataset.i, true); });
+    list.addEventListener("click", (e) => { const b = e.target.closest("button[data-i]"); if (b) pick(+b.dataset.i); });
     $("#carSearch").addEventListener("input", (e) => renderList(e.target.value));
     renderList();
+    pick(0);
 
     if (!reduce) {
       let raf = null, last = 0;
       const frame = (t) => {
         const dt = last ? Math.min((t - last) / 1000, 0.1) : 0;
         last = t;
-        CARS.forEach((c) => { if (c.st === "moving") { c.t += c.v * dt; c.m.setLatLng(posOf(c)); } });
+        CARS.forEach((c) => { if (c.st === "moving") { c.t += c.v * dt; place(c.el, posOf(c)); } });
+        syncPop();
         raf = requestAnimationFrame(frame);
       };
-      inView(mapEl, (v) => { cancelAnimationFrame(raf); last = 0; if (v) { map.invalidateSize(); raf = requestAnimationFrame(frame); } }, { threshold: 0.1 });
+      inView(canvas, (v) => { cancelAnimationFrame(raf); last = 0; if (v) raf = requestAnimationFrame(frame); }, { threshold: 0.1 });
     }
   }
 

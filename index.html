@@ -14,7 +14,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -238,7 +237,12 @@
         </div>
         <div class="livemap">
           <div class="livemap__map">
-            <div id="leafletMap" class="livemap__leaflet" role="img" aria-label="نقشه‌ی جزیره‌ی کیش با موقعیت نمونه‌ی خودروها"></div>
+            <div class="livemap__canvas" id="mapCanvas">
+              <img src="assets/kish-map.webp" alt="نقشه‌ی جزیره‌ی کیش با موقعیت نمونه‌ی خودروها" width="890" height="520">
+              <div class="livemap__cars" id="carLayer"></div>
+              <div class="mappop" id="mapPop" hidden></div>
+              <span class="livemap__credit" dir="ltr">© OpenStreetMap</span>
+            </div>
           </div>
           <div class="livemap__side">
             <label class="livemap__search" for="carSearch">
@@ -424,7 +428,6 @@
 
 <a href="https://wa.me/989121029560?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D8%AF%D9%85%D9%88%DB%8C%20kfzocar%20%D8%AF%D8%A7%D8%B1%D9%85" class="wa-fab" target="_blank" rel="noopener" aria-label="درخواست دمو در واتساپ"><i data-i="whatsapp"></i><span>درخواست دمو</span></a>
 
-<script src="assets/vendor/leaflet/leaflet.js"></script>
 <script src="assets/main.js"></script>
 </body>
 </html>
