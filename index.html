@@ -27,10 +27,11 @@
     <nav class="nav__links" id="navLinks" aria-label="منوی اصلی">
       <a href="#day">یک روز در دفتر</a>
       <a href="#fleet">ناوگان</a>
+      <a href="#live">نقشه‌ی زنده</a>
       <a href="#money">تسویه و حساب</a>
       <a href="#guests">رزرو آنلاین</a>
       <a href="#trust">امنیت</a>
-      <a href="https://wa.me/989191149560?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D8%AF%D9%85%D9%88%DB%8C%20kfzocar%20%D8%AF%D8%A7%D8%B1%D9%85" class="nav__wa" target="_blank" rel="noopener"><i data-i="whatsapp"></i>درخواست دمو</a>
+      <a href="https://wa.me/989121029560?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D8%AF%D9%85%D9%88%DB%8C%20kfzocar%20%D8%AF%D8%A7%D8%B1%D9%85" class="nav__wa" target="_blank" rel="noopener"><i data-i="whatsapp"></i>درخواست دمو</a>
       <a href="https://app.kfzocar.ir" class="btn btn--brand btn--sm">ورود به سامانه</a>
     </nav>
     <button class="nav__burger" id="navToggle" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
@@ -54,7 +55,7 @@
         </p>
         <div class="hero__cta">
           <a href="https://app.kfzocar.ir" class="btn btn--brand btn--lg">ورود به سامانه <i data-i="arrow"></i></a>
-          <a href="https://wa.me/989191149560?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D8%AF%D9%85%D9%88%DB%8C%20kfzocar%20%D8%AF%D8%A7%D8%B1%D9%85" class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-i="whatsapp"></i>درخواست دمو در واتساپ</a>
+          <a href="https://wa.me/989121029560?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D8%AF%D9%85%D9%88%DB%8C%20kfzocar%20%D8%AF%D8%A7%D8%B1%D9%85" class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-i="whatsapp"></i>درخواست دمو در واتساپ</a>
         </div>
       </div>
 
@@ -135,6 +136,15 @@
               <span class="chip">مدیریت چک</span>
             </div>
           </li>
+          <li class="moment" data-time="۱۵:۴۵" data-label="عصر، ساحل" data-sky="afternoon">
+            <time>۱۵:۴۵</time>
+            <div>
+              <h3>مشتری زنگ زد: «ماشین را کجا تحویل بدهم؟ من جلوی یک کافه‌ام.»</h3>
+              <p class="moment__then">آدرس دقیق را نمی‌داند، راننده‌ی شما هم.</p>
+              <p class="moment__now"><i data-i="check"></i>موقعیت زنده‌ی همان خودرو را روی نقشه دیدید و راننده مستقیم رفت سراغش.</p>
+              <span class="chip">موقعیت زنده‌ی خودروها</span>
+            </div>
+          </li>
           <li class="moment" data-time="۱۷:۳۰" data-label="غروب، اسکله" data-sky="sunset">
             <time>۱۷:۳۰</time>
             <div>
@@ -204,6 +214,58 @@
         <li><i data-i="message"></i><div><h3>پیامک به مشتری</h3><p>خلاصه‌ی قرارداد و یادآوری روز قبل از برگشت (قابل فعال‌سازی).</p></div></li>
         <li><i data-i="moon"></i><div><h3>حالت شب</h3><p>برای شیفت‌های شبانه؛ روی موبایل، تبلت و کامپیوتر.</p></div></li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ============ LIVE MAP ============ -->
+  <section class="livesec" id="live">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow eyebrow--plain">جدید · موقعیت مکانی</p>
+        <h2>هر خودرو الان کجای کیش است؟ <span class="hl">روی نقشه ببینید.</span></h2>
+        <p>موقعیت زنده‌ی خودروهای ناوگان روی نقشه نمایش داده می‌شود: کدام در حرکت است، کدام جایی پارک شده و کدام در دفتر منتظر مشتری بعدی است.</p>
+      </header>
+
+      <div class="livemap">
+        <div class="livemap__map">
+          <svg viewBox="0 0 800 460" role="img" aria-label="نمونه‌ی نقشه‌ی جزیره‌ی کیش با موقعیت خودروها" id="mapSvg">
+            <defs>
+              <pattern id="waves" width="28" height="14" patternUnits="userSpaceOnUse">
+                <path d="M0 7 Q7 2 14 7 T28 7" fill="none" class="map-wave"/>
+              </pattern>
+            </defs>
+            <rect x="0" y="0" width="800" height="460" class="map-sea"/>
+            <rect x="0" y="0" width="800" height="460" fill="url(#waves)"/>
+            <path class="map-shore" d="M80,250 C85,165 185,100 330,85 C475,70 650,88 725,158 C782,210 770,298 706,340 C624,394 470,405 330,395 C195,386 75,345 80,250 Z"/>
+            <path class="map-land" d="M90,250 C95,170 190,110 330,95 C470,80 640,95 715,160 C770,205 760,290 700,330 C620,385 470,395 330,385 C200,376 85,340 90,250 Z"/>
+            <path class="map-road" id="ringRoad" d="M140,250 C145,190 220,145 335,135 C465,122 610,135 670,185 C712,220 705,280 660,305 C590,345 465,352 335,345 C220,338 137,310 140,250 Z"/>
+            <path class="map-road map-road--minor" d="M335,135 C350,200 330,280 335,345"/>
+            <path class="map-road map-road--minor" d="M520,128 C505,200 515,280 520,350"/>
+            <g class="map-airport" transform="rotate(-6 440 215)">
+              <rect x="370" y="208" width="150" height="14" rx="3"/>
+              <path d="M380 215 H510" class="map-runway-line"/>
+            </g>
+            <g class="map-pier"><path d="M705,170 L745,150 M712,182 L752,166"/></g>
+            <g class="map-hotels"><rect x="440" y="356" width="14" height="10" rx="2"/><rect x="462" y="360" width="14" height="10" rx="2"/><rect x="484" y="358" width="14" height="10" rx="2"/><rect x="506" y="355" width="14" height="10" rx="2"/></g>
+            <g class="map-office"><circle cx="300" cy="245" r="13"/><path d="M300 238 v14 M293 245 h14"/></g>
+            <text x="445" y="194" class="map-label">فرودگاه</text>
+            <text x="728" y="135" class="map-label">اسکله</text>
+            <text x="480" y="392" class="map-label">هتل‌ها</text>
+            <text x="300" y="282" class="map-label">دفتر شما</text>
+            <g id="carLayer"></g>
+          </svg>
+          <div class="livemap__pop" id="mapPop" aria-live="polite">
+            <b id="popCar">تویوتا کمری</b>
+            <span class="plate"><span id="popPlate">۲۱۴۷۸</span><em>کیش</em></span>
+            <span class="livemap__state" id="popState">در حال حرکت</span>
+            <small id="popWho">قرارداد: Olga P. · به‌روزرسانی: همین حالا</small>
+          </div>
+          <span class="livemap__badge"><i></i>زنده</span>
+        </div>
+
+        <ul class="livemap__list" id="carList" aria-label="خودروهای ناوگان"></ul>
+      </div>
+      <p class="livemap__note">نقشه و خودروها نمونه هستند. در سامانه، موقعیت خودروهای خود شما روی نقشه‌ی واقعی نمایش داده می‌شود.</p>
     </div>
   </section>
 
@@ -337,13 +399,13 @@
           <h2>کیش را با ناوگانی منظم‌تر و مشتری بیشتر بچرخانید.</h2>
           <p>برای دموی رایگان و دیدن سامانه از نزدیک در واتساپ پیام بدهید، یا QR را با گوشی اسکن کنید.</p>
           <div class="end__cta">
-            <a href="https://wa.me/989191149560?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D8%AF%D9%85%D9%88%DB%8C%20kfzocar%20%D8%AF%D8%A7%D8%B1%D9%85" class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-i="whatsapp"></i>درخواست دمو در واتساپ</a>
+            <a href="https://wa.me/989121029560?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D8%AF%D9%85%D9%88%DB%8C%20kfzocar%20%D8%AF%D8%A7%D8%B1%D9%85" class="btn btn--wa btn--lg" target="_blank" rel="noopener"><i data-i="whatsapp"></i>درخواست دمو در واتساپ</a>
             <a href="https://app.kfzocar.ir" class="btn btn--light btn--lg">ورود به سامانه <i data-i="arrow"></i></a>
           </div>
           <div class="contact-line">
             <span>واتساپ:</span>
-            <b class="phone-num" dir="ltr" id="waNumber">0919 114 9560</b>
-            <button type="button" class="copy" id="copyNum" data-copy="09191149560"><i data-i="copy"></i><span>کپی شماره</span></button>
+            <b class="phone-num" dir="ltr" id="waNumber">0912 102 9560</b>
+            <button type="button" class="copy" id="copyNum" data-copy="09121029560"><i data-i="copy"></i><span>کپی شماره</span></button>
           </div>
           <ul class="devices">
             <li><i data-i="smartphone"></i>موبایل</li>
@@ -366,12 +428,12 @@
   <div class="wrap foot__in">
     <a href="#top" class="logo"><span class="logo__mark"><i data-i="car"></i></span><span class="logo__word">kfzo<b>car</b></span></a>
     <span>سامانه‌ی مدیریت اجاره خودرو · کیش</span>
-    <a href="https://wa.me/989191149560?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D8%AF%D9%85%D9%88%DB%8C%20kfzocar%20%D8%AF%D8%A7%D8%B1%D9%85" class="foot__wa" target="_blank" rel="noopener"><i data-i="whatsapp"></i><span dir="ltr">0919 114 9560</span></a>
+    <a href="https://wa.me/989121029560?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D8%AF%D9%85%D9%88%DB%8C%20kfzocar%20%D8%AF%D8%A7%D8%B1%D9%85" class="foot__wa" target="_blank" rel="noopener"><i data-i="whatsapp"></i><span dir="ltr">0912 102 9560</span></a>
     <small>© <span id="year">۲۰۲۶</span> kfzocar.ir · نام‌ها، پروازها و قیمت‌های این صفحه نمونه هستند.</small>
   </div>
 </footer>
 
-<a href="https://wa.me/989191149560?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D8%AF%D9%85%D9%88%DB%8C%20kfzocar%20%D8%AF%D8%A7%D8%B1%D9%85" class="wa-fab" target="_blank" rel="noopener" aria-label="درخواست دمو در واتساپ"><i data-i="whatsapp"></i><span>درخواست دمو</span></a>
+<a href="https://wa.me/989121029560?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D8%AF%D8%B1%D8%AE%D9%88%D8%A7%D8%B3%D8%AA%20%D8%AF%D9%85%D9%88%DB%8C%20kfzocar%20%D8%AF%D8%A7%D8%B1%D9%85" class="wa-fab" target="_blank" rel="noopener" aria-label="درخواست دمو در واتساپ"><i data-i="whatsapp"></i><span>درخواست دمو</span></a>
 
 <script src="assets/main.js"></script>
 </body>

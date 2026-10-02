@@ -272,6 +272,79 @@
   links.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
   addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
+  /* ---------------- live map: vehicle locations ---------------- */
+  const mapSvg = $("#mapSvg");
+  if (mapSvg) {
+    const NS = "http://www.w3.org/2000/svg";
+    const road = $("#ringRoad");
+    const L = road.getTotalLength();
+    const STATE = { moving: "در حال حرکت", parked: "متوقف", office: "در دفتر · آزاد" };
+    const CARS = [
+      { car: "تویوتا کمری", plate: "۲۱۴۷۸", st: "moving", who: "قرارداد: Olga P.", at: 0.05, speed: 0.018 },
+      { car: "هیوندای توسان", plate: "۳۰۵۱۲", st: "moving", who: "قرارداد: Mert Y.", at: 0.42, speed: 0.013 },
+      { car: "هیوندای النترا", plate: "۴۴۲۰۷", st: "moving", who: "قرارداد: مهدی ر.", at: 0.7, speed: -0.015 },
+      { car: "کیا سراتو", plate: "۱۸۹۴۰", st: "parked", who: "قرارداد: Ayşe K. · نزدیک هتل‌ها", xy: [470, 344] },
+      { car: "تویوتا کمری", plate: "۵۲۳۶۱", st: "office", who: "آماده‌ی تحویل بعدی", xy: [322, 232] },
+    ];
+    const layer = $("#carLayer");
+    CARS.forEach((c, i) => {
+      const g = document.createElementNS(NS, "g");
+      g.setAttribute("class", `map-car map-car--${c.st}`);
+      g.innerHTML = `<circle class="map-car__ring" r="16"/><circle class="map-car__dot" r="8"/><text class="map-car__tag" y="-18">${c.car} ${c.plate}</text>`;
+      g.addEventListener("click", () => { pick(i, true); });
+      layer.appendChild(g);
+      c.el = g;
+    });
+    const placeCar = (c) => {
+      let x, y;
+      if (c.xy) [x, y] = c.xy;
+      else { const pt = road.getPointAtLength((((c.at % 1) + 1) % 1) * L); x = pt.x; y = pt.y; }
+      c.el.setAttribute("transform", `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
+    };
+    CARS.forEach(placeCar);
+
+    const list = $("#carList");
+    list.innerHTML = CARS.map((c, i) => `<li><button type="button" data-i="${i}" aria-pressed="false">
+      <span class="dot is-${c.st}"></span>
+      <span><b>${c.car} <span class="plate"><span>${c.plate}</span><em>کیش</em></span></b><small>${STATE[c.st]}</small></span>
+    </button></li>`).join("");
+
+    let sel = -1, auto = true, cycle = null;
+    function pick(i, byUser) {
+      if (byUser) { auto = false; clearInterval(cycle); }
+      sel = i;
+      const c = CARS[i];
+      CARS.forEach((x, j) => x.el.classList.toggle("is-sel", j === i));
+      $$("button", list).forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.i === i)));
+      $("#popCar").textContent = c.car;
+      $("#popPlate").textContent = c.plate;
+      const st = $("#popState");
+      st.textContent = STATE[c.st];
+      st.className = `livemap__state is-${c.st}`;
+      $("#popWho").textContent = `${c.who} · به‌روزرسانی: همین حالا`;
+      layer.appendChild(c.el); // draw the selected car on top
+    }
+    list.addEventListener("click", (e) => { const b = e.target.closest("button[data-i]"); if (b) pick(+b.dataset.i, true); });
+    pick(0, false);
+
+    if (!reduce) {
+      let raf = null, last = 0;
+      const frame = (t) => {
+        const dt = last ? Math.min((t - last) / 1000, 0.05) : 0;
+        last = t;
+        CARS.forEach((c) => { if (c.speed) { c.at += c.speed * dt; placeCar(c); } });
+        raf = requestAnimationFrame(frame);
+      };
+      inView(mapSvg, (v) => {
+        cancelAnimationFrame(raf); last = 0; clearInterval(cycle);
+        if (v) {
+          raf = requestAnimationFrame(frame);
+          if (auto) cycle = setInterval(() => pick((sel + 1) % CARS.length, false), 3800);
+        }
+      }, { threshold: 0.2 });
+    }
+  }
+
   /* copy WhatsApp number */
   const copyBtn = $("#copyNum");
   if (copyBtn) {
