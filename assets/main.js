@@ -290,7 +290,8 @@
     CARS.forEach((c, i) => {
       const g = document.createElementNS(NS, "g");
       g.setAttribute("class", `map-car map-car--${c.st}`);
-      g.innerHTML = `<circle class="map-car__ring" r="16"/><circle class="map-car__dot" r="8"/><text class="map-car__tag" y="-18">${c.car} ${c.plate}</text>`;
+      const big = matchMedia("(max-width: 560px)").matches; // the map is drawn small on phones
+      g.innerHTML = `<circle class="map-car__ring" r="${big ? 26 : 16}"/><circle class="map-car__dot" r="${big ? 14 : 8}"/><text class="map-car__tag" y="${big ? -26 : -18}">${c.car} ${c.plate}</text>`;
       g.addEventListener("click", () => { pick(i, true); });
       layer.appendChild(g);
       c.el = g;

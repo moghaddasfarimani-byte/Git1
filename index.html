@@ -228,19 +228,14 @@
 
       <div class="livemap">
         <div class="livemap__map">
-          <svg viewBox="0 0 800 460" role="img" aria-label="نمونه‌ی نقشه‌ی جزیره‌ی کیش با موقعیت خودروها" id="mapSvg">
-            <defs>
-              <pattern id="waves" width="28" height="14" patternUnits="userSpaceOnUse">
-                <path d="M0 7 Q7 2 14 7 T28 7" fill="none" class="map-wave"/>
-              </pattern>
-            </defs>
-            <rect x="0" y="0" width="800" height="460" class="map-sea"/>
-            <rect x="0" y="0" width="800" height="460" fill="url(#waves)"/>
-            <path class="map-shore" d="M80,250 C85,165 185,100 330,85 C475,70 650,88 725,158 C782,210 770,298 706,340 C624,394 470,405 330,395 C195,386 75,345 80,250 Z"/>
-            <path class="map-land" d="M90,250 C95,170 190,110 330,95 C470,80 640,95 715,160 C770,205 760,290 700,330 C620,385 470,395 330,385 C200,376 85,340 90,250 Z"/>
-            <path class="map-road" id="ringRoad" d="M140,250 C145,190 220,145 335,135 C465,122 610,135 670,185 C712,220 705,280 660,305 C590,345 465,352 335,345 C220,338 137,310 140,250 Z"/>
-            <path class="map-road map-road--minor" d="M335,135 C350,200 330,280 335,345"/>
-            <path class="map-road map-road--minor" d="M520,128 C505,200 515,280 520,350"/>
+          <svg viewBox="0 0 800 460" width="800" height="460" preserveAspectRatio="xMidYMid meet" role="img" aria-label="نمونه‌ی نقشه‌ی جزیره‌ی کیش با موقعیت خودروها" id="mapSvg">
+            <rect x="0" y="0" width="800" height="460" class="map-sea" fill="#10365e"/>
+            <path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M30,40 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M620,30 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M40,420 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M640,430 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M20,200 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M740,260 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M250,445 q12,-8 24,0 t24,0 t24,0"/><path class="map-sea-lines" fill="none" stroke="#23507e" stroke-width="1.2" d="M300,25 q12,-8 24,0 t24,0 t24,0"/>
+            <path class="map-shore" fill="#3fbfb2" fill-opacity=".55" d="M80,250 C85,165 185,100 330,85 C475,70 650,88 725,158 C782,210 770,298 706,340 C624,394 470,405 330,395 C195,386 75,345 80,250 Z"/>
+            <path class="map-land" fill="#2a2658" stroke="#3fbfb2" stroke-width="2" d="M90,250 C95,170 190,110 330,95 C470,80 640,95 715,160 C770,205 760,290 700,330 C620,385 470,395 330,385 C200,376 85,340 90,250 Z"/>
+            <path class="map-road" id="ringRoad" fill="none" stroke="#4a4386" stroke-width="7" d="M140,250 C145,190 220,145 335,135 C465,122 610,135 670,185 C712,220 705,280 660,305 C590,345 465,352 335,345 C220,338 137,310 140,250 Z"/>
+            <path class="map-road map-road--minor" fill="none" stroke="#4a4386" stroke-width="4" d="M335,135 C350,200 330,280 335,345"/>
+            <path class="map-road map-road--minor" fill="none" stroke="#4a4386" stroke-width="4" d="M520,128 C505,200 515,280 520,350"/>
             <g class="map-airport" transform="rotate(-6 440 215)">
               <rect x="370" y="208" width="150" height="14" rx="3"/>
               <path d="M380 215 H510" class="map-runway-line"/>

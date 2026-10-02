@@ -20,10 +20,10 @@
   --on-flap: #1a1405;
   --wa: #25d366;          /* WhatsApp green */
   --on-wa: #062b16;
-  --sea: #0f2a4a;         /* map water */
-  --sea-line: #1b3d63;
-  --land: #1c1a3a;
-  --shore: #2f6f7a;
+  --sea: #10365e;         /* map water */
+  --sea-line: #23507e;
+  --land: #2a2658;
+  --shore: #3fbfb2;
   /* type */
   --display: "Lalezar", "Vazirmatn", Tahoma, sans-serif;
   --body: "Vazirmatn", Tahoma, "Segoe UI", sans-serif;
@@ -304,13 +304,14 @@ i[data-i] svg { width: 1.15em; height: 1.15em; }
 .livemap { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
 .livemap__map {
   position: relative; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); background: var(--sea);
+  align-self: start;
 }
-.livemap__map svg { width: 100%; height: auto; }
+.livemap__map svg { display: block; width: 100%; height: auto; max-width: 100%; aspect-ratio: 800 / 460; }
 .map-sea { fill: var(--sea); }
-.map-wave { stroke: var(--sea-line); stroke-width: 1.2; }
+.map-sea-lines { stroke: var(--sea-line); stroke-width: 1.2; fill: none; }
 .map-shore { fill: var(--shore); opacity: .55; }
 .map-land { fill: var(--land); stroke: var(--shore); stroke-width: 2; }
-.map-road { fill: none; stroke: var(--line); stroke-width: 7; stroke-linecap: round; }
+.map-road { fill: none; stroke: #4a4386; stroke-width: 7; stroke-linecap: round; }
 .map-road--minor { stroke-width: 4; opacity: .8; }
 .map-airport rect { fill: var(--bg-3); stroke: var(--line); }
 .map-runway-line { stroke: var(--fg-2); stroke-width: 1.5; stroke-dasharray: 10 8; opacity: .6; }
@@ -318,7 +319,7 @@ i[data-i] svg { width: 1.15em; height: 1.15em; }
 .map-hotels rect { fill: var(--bg-3); stroke: var(--fg-2); stroke-width: 1; opacity: .9; }
 .map-office circle { fill: var(--flap); }
 .map-office path { stroke: var(--on-flap); stroke-width: 2.5; stroke-linecap: round; }
-.map-label { fill: var(--fg-2); font: 700 15px var(--body); text-anchor: middle; }
+.map-label { fill: var(--fg); font: 700 16px var(--body); text-anchor: middle; }
 .map-car { cursor: pointer; }
 .map-car__ring { fill: none; stroke-width: 2; opacity: 0; }
 .map-car__dot { stroke: var(--bg); stroke-width: 3; }
@@ -556,6 +557,9 @@ input[type="range"] { width: 100%; accent-color: var(--brand); height: 28px; cur
   .spec, .spec--3, .trust__list { grid-template-columns: minmax(0, 1fr); }
   .moment { grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 20px 16px; }
   .jars { grid-template-columns: minmax(0, 1fr); }
+  .map-label { font-size: 26px; }
+  .map-car__tag { font-size: 20px; }
+  .map-car__dot { stroke-width: 4; }
   .livemap__pop { position: static; margin: 0; border-radius: 0; border-inline: 0; border-bottom: 0; }
   .receipt, .sim__in { padding-inline: 18px; }
   .stamp { top: 22px; left: 14px; font-size: .85rem; }
