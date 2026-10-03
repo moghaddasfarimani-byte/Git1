@@ -45,6 +45,8 @@
     whatsapp: '<path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9.2 8.4c.2-.5.9-.6 1.2-.2l.8 1.2c.2.3.1.7-.1.9l-.5.5c.5 1.1 1.4 2 2.5 2.5l.5-.5c.3-.2.7-.3.9-.1l1.2.8c.4.3.3 1-.2 1.2-.7.3-1.5.4-2.3.1a7.5 7.5 0 0 1-4.1-4.1c-.3-.8-.2-1.6.1-2.3z" fill="currentColor" stroke="none"/>',
     copy: '<rect x="8" y="8" width="14" height="14" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
     search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+    gift: '<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5C9.4 3 11 5.6 12 8c1-2.4 2.6-5 4.5-5a2.5 2.5 0 0 1 0 5"/>',
+    sparkle: '<path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/><path d="M19 3v4M21 5h-4"/>',
     browser: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M21.2 8H12M3.9 6.1 8.5 14M10.9 21.9 15.5 14"/>',
   };
   $$("i[data-i]").forEach((el) => {
@@ -360,6 +362,34 @@
       };
       inView(canvas, (v) => { cancelAnimationFrame(raf); last = 0; if (v) raf = requestAnimationFrame(frame); }, { threshold: 0.1 });
     }
+  }
+
+  /* ---------------- pricing: fleet-size match + monthly/yearly ---------------- */
+  const plans = $$(".plan");
+  const fleet = $("#fleetSize");
+  if (plans.length && fleet) {
+    const matchPlan = () => {
+      const n = +fleet.value;
+      $("#fleetOut").textContent = n >= 40 ? "۴۰ خودرو و بیشتر" : `${fa(n)} خودرو`;
+      let name = "";
+      plans.forEach((p) => {
+        const on = n >= +p.dataset.min && n <= +p.dataset.max;
+        p.classList.toggle("is-match", on);
+        if (on) name = $("h3", p).textContent;
+      });
+      $("#fleetHint").textContent = `طرح مناسب شما: ${name}`;
+    };
+    fleet.addEventListener("input", matchPlan);
+    matchPlan();
+
+    $$(".pick__bill button").forEach((b) => b.addEventListener("click", () => {
+      const bill = b.dataset.bill;
+      $$(".pick__bill button").forEach((x) => { x.classList.toggle("is-on", x === b); x.setAttribute("aria-pressed", String(x === b)); });
+      $$("[data-monthly]", $("#plans")).forEach((el) => {
+        el.textContent = el.dataset[bill];
+        if (el.tagName === "B" && !reduce) { el.classList.remove("is-swap"); void el.offsetWidth; el.classList.add("is-swap"); }
+      });
+    }));
   }
 
   /* copy WhatsApp number */
